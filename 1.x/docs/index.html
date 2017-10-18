@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title>sbt Reference Manual</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='website'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
+<script type="text/javascript" src="js/groups.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="index.html" class="active">
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+0.1*
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="index.html" class="active">sbt Reference Manual</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="index.html" class="active">
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+0.1*
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h1><a href="#sbt-reference-manual" name="sbt-reference-manual" class="anchor"><span class="anchor-link"></span></a>sbt Reference Manual</h1>
+<p>sbt is a build tool for Scala, Java, and <a href="https://github.com/d40cht/sbt-cpp">more</a>. It requires Java 1.8 or later.</p>
+<h3><a href="#install" name="install" class="anchor"><span class="anchor-link"></span></a>Install</h3>
+<p>See <a href="getting-started/setup.html">Installing sbt</a> for the setup instructions.</p>
+<h3><a href="#getting-started" name="getting-started" class="anchor"><span class="anchor-link"></span></a>Getting Started</h3>
+<p>To get started, <em>please read</em> the <a href="getting-started/index.html">Getting Started Guide</a>. You will save yourself a <em>lot</em> of time if you have the right understanding of the big picture up-front.</p>
+<p>Use <a href="https://stackoverflow.com/tags/sbt">Stack Overflow</a> for questions. Use the <a href="https://groups.google.com/d/forum/sbt-dev">sbt-dev mailing list</a> for discussing sbt development. Use <a href="https://twitter.com/scala_sbt">@scala_sbt</a> for questions and discussions.</p>
+<h3><a href="#features-of-sbt" name="features-of-sbt" class="anchor"><span class="anchor-link"></span></a>Features of sbt</h3>
+<ul>
+  <li>Little or no configuration required for simple projects.</li>
+  <li>Scala-based <a href="Basic-Def.html">build definition</a> that can use the full flexibility of Scala code.</li>
+  <li>Accurate incremental recompilation using information extracted from the compiler.</li>
+  <li>Continuous compilation and testing with <a href="Triggered-Execution.html">triggered execution</a>.</li>
+  <li>Packages and publishes jars</li>
+  <li>Generates documentation with scaladoc</li>
+  <li>Supports mixed Scala/<a href="Java-Sources.html">Java</a> projects</li>
+  <li>Supports <a href="Testing.html">testing</a> with ScalaCheck, specs, and ScalaTest. JUnit is supported by a plugin.</li>
+  <li>Starts the Scala REPL with project classes and dependencies on the classpath</li>
+  <li>Modularization supported with <a href="Multi-Project.html">sub-projects</a></li>
+  <li>External project support (list a git repository as a dependency!)</li>
+  <li><a href="Parallel-Execution.html">Parallel task execution</a>, including parallel test execution</li>
+  <li><a href="Library-Dependencies.html">Library management support</a>: inline declarations, external Ivy or Maven configuration files, or manual management</li>
+</ul>
+<h3><a href="#also" name="also" class="anchor"><span class="anchor-link"></span></a>Also</h3>
+<p>This documentation can be forked on <a href="https://github.com/sbt/website/">GitHub</a>. Feel free to make corrections and add documentation.</p>
+<p>Documentation for 0.7.x has been <a href="http://www.scala-sbt.org/0.7.7/docs/home.html">archived here</a>. This documentation applies to sbt 1.0.2.</p>
+<p>See also the <a href="../api/index.html">API Documentation</a>, and the <a href="Name-Index.html">index of names and types</a>.</p>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/index.md">here</a>.
+</div>
+
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="getting-started/index.html">Getting Started with sbt</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="index.html#sbt-reference-manual" class="header">sbt Reference Manual</a>
+  <ul>
+    <li><a href="index.html#install" class="header">Install</a></li>
+    <li><a href="index.html#getting-started" class="header">Getting Started</a></li>
+    <li><a href="index.html#features-of-sbt" class="header">Features of sbt</a></li>
+    <li><a href="index.html#also" class="header">Also</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2017</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="js/magellan.js"></script>
+
+<style type="text/css">@import "lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>
