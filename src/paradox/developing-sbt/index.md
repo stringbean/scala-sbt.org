@@ -51,6 +51,9 @@ and internal implementation. Most things are open to plugins.
 
 @@@ index
 * [Modules](modules.md)
+* [Coding Guidelines](coding-guidelines.md)
 * [sbt-datatype](sbt-datatype.md)
+* [Compiler Interface](compiler-interface/index.md)
 * [Launcher](launcher/index.md)
+* [Developer Notes](developer-notes/index.md)
 @@@

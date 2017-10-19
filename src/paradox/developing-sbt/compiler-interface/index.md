@@ -1,0 +1,13 @@
+## Compiler Interface
+
+The compiler interface is the communication link between sbt and the Scala compiler.
+
+It is used to get information from the Scala compiler, and must therefore be compiled against the Scala version in use
+for the configured projects.
+
+The code for this project can be found in the directory
+[compile/interface](https://github.com/sbt/sbt/tree/0.13/compile/interface).
+
+@@@ index
+* [Version Specific Sources](version-specific-sources.md)
+@@@

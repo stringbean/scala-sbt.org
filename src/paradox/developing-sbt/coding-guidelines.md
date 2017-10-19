@@ -1,29 +1,23 @@
 ---
-out: Coding-Guideline.html
+label: Coding Guidelines
 ---
 
+  [Sbt-Datatype]: sbt-datatype.md
   [jsuereth2012]: http://jsuereth.com/scala/2012/04/22/scaladays.html
   [pins_trait127]: http://www.artima.com/pins1ed/traits.html#12.7
   [mima]: https://github.com/typesafehub/migration-manager
 
-sbt Coding Guideline
---------------------
+## sbt Coding Guidelines
 
 This page discusses the coding style and other guidelines for sbt 1.0.
 
-### General goal
+### General goals
 
-sbt 1.0 will primarily target Scala 2.12.
-We will cross-build against Scala 2.10.
-
-#### Clean up old deprecation
-
-Before 1.0 is release, we should clean up deprecations.
+sbt 1.0 will primarily target Scala 2.12 with cross-building against Scala 2.10.
 
 #### Aim for zero warnings (except deprecation)
 
-On Scala 2.12 we should aim for zero warnings.
-One exception may be deprecation if it's required for cross-building.
+On Scala 2.12 we should aim for zero warnings. One exception may be deprecations if required for cross-building.
 
 ### Modular design
 
@@ -37,8 +31,8 @@ Code against interfaces.
 
 #### Hide implementation details
 
-The implementation details should be hidden behind `sbt.internal.x` packages,
-where `x` could be the name of the main package (like `io`).
+The implementation details should be hidden behind `sbt.internal.x` packages, where `x` could be the name of the main
+package (like `io`).
 
 #### Less interdependence
 
@@ -54,22 +48,20 @@ A module may be declared internal if it has no use to the public.
 
 #### Compiler flags
 
-```
--encoding utf8
--deprecation
--feature
--unchecked
--Xlint
--language:higherKinds
--language:implicitConversions
--Xfuture
--Yinline-warnings
--Yno-adapted-args
--Ywarn-dead-code
--Ywarn-numeric-widen
--Ywarn-value-discard
--Xfatal-warnings
-```
+* `-encoding utf8`
+* `-deprecation`
+* `-feature`
+* `-unchecked`
+* `-Xlint`
+* `-language:higherKinds`
+* `-language:implicitConversions`
+* `-Xfuture`
+* `-Yinline-warnings`
+* `-Yno-adapted-args`
+* `-Ywarn-dead-code`
+* `-Ywarn-numeric-widen`
+* `-Ywarn-value-discard`
+* `-Xfatal-warnings`
 
 The `-Xfatal-warnings` may be removed if there are unavoidable warnings.
 
@@ -80,23 +72,25 @@ The organization name for published artifacts should remain `org.scala-sbt`.
 
 ### Binary resiliency
 
-A good overview on the topic of binary resiliency is [Josh's 2012 talk][jsuereth2012] on
-Binary resiliency.
-The guideline here applies mostly to publicly exposed APIs.
+A good overview on the topic of binary resiliency is
+[Josh's 2012 talk](http://jsuereth.com/scala/2012/04/22/scaladays.html) on Binary resiliency. The guidelines here
+apply mostly to publicly exposed APIs.
 
 #### MiMa
 
-Use [MiMa][mima].
+Use @extref:[MiMa](github:typesafe/migration-manager).
 
 #### Public traits should contain `def` declarations only
 
-- `val` or `var` in a `trait` results in code generated at subclass and in the artificial `Foo\$class.\$init\$`
-- `lazy val` results in code generated at subclass
+* `val` or `var` in a `trait` results in code generated at subclass and in the artificial `Foo$class.$init$`.
+* `lazy val` results in code generated at subclass.
 
 #### Abstract classes are also useful
 
-[To trait, or not to trait?][pins_trait127].
-Abstract classes are less flexible than traits, but traits pose more problems for binary compatibility. Abstract classes also have better Java interoperability.
+[To trait, or not to trait?](http://www.artima.com/pins1ed/traits.html#12.7)
+
+Abstract classes are less flexible than traits, but traits pose more problems for binary compatibility. Abstract classes
+also have better Java interoperability.
 
 #### Seal traits and abstract classes
 
@@ -110,14 +104,14 @@ If there's no need to keep a class open, finalize it.
 
 The typeclass pattern with pure traits might ease maintaining binary compatibility more so than subclassing.
 
-#### Avoid case classes, use sbt-datatype
+#### Avoid case classes
 
 Case classes involve code generation that makes it harder to maintain binary compatibility over time.
+@ref[sbt-datatype][Sbt-Datatype] should be used instead.
 
 #### Prefer method overloading over default parameter values
 
-Default parameter values are effectively code generation,
-which makes them difficult to maintain.
+Default parameter values are effectively code generation which makes them difficult to maintain.
 
 ### Other public API matters
 
@@ -129,22 +123,22 @@ Define datatypes.
 
 #### Avoid overuse of `def apply`
 
-`def apply` should be reserved for factory methods
-in a companion object that returns type `T`.
+`def apply` should be reserved for factory methods in a companion object that returns type `T`.
 
 #### Use specific datatypes (`Vector`, `List`, or `Array`), rather than `Seq`
 
-`scala.Seq` is `scala.collection.Seq`, which is not immutable.
-Default to `Vector`. Use `List` if constant prepending is needed.
-Use `Array` if Java interoperability is needed.
-Note that using mutable collections is perfectly fine within the implementation.
+`scala.Seq` is `scala.collection.Seq`, which is not immutable. Default to `Vector`. Use `List` if constant prepending
+is needed. Use `Array` if Java interoperability is needed.
+
+@@@ note
+Using mutable collections is perfectly fine within the implementation.
+@@@
 
 #### Avoid calling `toSeq` or anything with side-effects on `Set`
 
-`Set` is fine if you stick to set operations, like `contains` and `subsetOf`.
-More often than not, `toSeq` is called explicitly or implicitly,
-or some side-effecting method is called from `map`.
-This introduces non-determinism to the code.
+`Set` is fine if you stick to set operations, like `contains` and `subsetOf`. More often than not, `toSeq` is called
+explicitly or implicitly, or some side-effecting method is called from `map`. This introduces non-determinism to the
+code.
 
 #### Avoid calling `toSeq` on `Map`
 
@@ -152,15 +146,14 @@ Same as above. This will introduce non-determinism.
 
 #### Avoid functions and tuples in the signature, if Java interoperability is needed
 
-Instead of functions and tuples, turn them into a trait.
-This applies where interoperability is a concern, like implementing
-incremental compilation.
+Instead of functions and tuples, turn them into a trait. This applies where interoperability is a concern, like
+implementing incremental compilation.
 
 ### Style matters
 
 #### Use scalariform
 
-sbt-houserules comes with scalariform for formatting source code consistently.
+@extref:[sbt-houserules](module:sbt-houserules) comes with scalariform for formatting source code consistently.
 
 #### Avoid procedure syntax
 
@@ -171,7 +164,8 @@ Declare an explicit `Unit` return.
 This style is encouraged:
 
 ```scala
-final class FooID {}
+final class FooID
+
 object FooID {
   implicit val fooIdPicklerUnpicker: PicklerUnpickler[FooID] = ???
 }
@@ -181,9 +175,9 @@ object FooID {
 
 Avoid defining implicit converters in companion objects and package objects.
 
-Suppose the IO module introduces a `URL` enrichment called `RichURI`,
-and LibraryManagement introduces a `String` enrichment called `GroupID` (for `ModuleID` syntax).
-These implicit conversions should be defined in an object named `syntax` in the respective package:
+Suppose the IO module introduces a `URL` enrichment called `RichURI` and LibraryManagement introduces a `String`
+enrichment called `GroupID` (for `ModuleID` syntax). These implicit conversions should be defined in an object named
+`syntax` in the respective package:
 
 ```scala
 package sbt.io
@@ -193,8 +187,8 @@ object syntax {
 }
 ```
 
-When all the layers are available, the `sbt` package should also define an object called `syntax`
-which forwards implicit conversions from all the layers:
+When all the layers are available, the `sbt` package should also define an object called `syntax` which forwards
+implicit conversions from all the layers:
 
 ```scala
 package sbt
