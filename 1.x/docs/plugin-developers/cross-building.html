@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Getting Started · sbt Reference Manual</title>
+<title>Cross-building Plugins · sbt Reference Manual</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='website'/>
@@ -35,7 +35,7 @@
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../getting-started/index.html" class="active page">Getting Started with sbt</a>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
   <ul>
     <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
     <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
@@ -46,7 +46,7 @@
     <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
     <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
     <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
-    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="active page">Cross-building Plugins</a></li>
   </ul></li>
   <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
   <ul>
@@ -94,7 +94,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../getting-started/index.html" class="active page">Getting Started with sbt</a>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
   <ul>
     <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
     <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
@@ -105,7 +105,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
     <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
     <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
-    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="active page">Cross-building Plugins</a></li>
   </ul></li>
   <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
   <ul>
@@ -131,7 +131,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-breadcrumbs">
 <ul>
   <li><a href="../index.html">sbt Reference Manual</a></li>
-  <li>Getting Started with sbt</li>
+  <li><a href="../plugin-developers/index.html">sbt for Plugin Developers</a></li>
+  <li>Cross-building Plugins</li>
 </ul>
 </div>
 </div>
@@ -139,22 +140,58 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h2><a href="#getting-started-with-sbt" name="getting-started-with-sbt" class="anchor"><span class="anchor-link"></span></a>Getting Started with sbt</h2>
-<p>sbt uses a small number of concepts to support flexible and powerful build definitions. There are not that many concepts, but sbt is not exactly like other build systems and there are details you <em>will</em> stumble on if you haven&rsquo;t read the documentation.</p>
-<p>The Getting Started Guide covers the concepts you need to know to create and maintain an sbt build definition.</p>
-<p>It is <em>highly recommended</em> to read the Getting Started Guide!</p>
-<p>If you are in a huge hurry, the most important conceptual background can be found in <a href="Basic-Def.html">build definition</a>, <a href="Scopes.html">scopes</a>, and <a href="Task-Graph.html">task graph</a>. But we don&rsquo;t promise that it&rsquo;s a good idea to skip the other pages in the guide.</p>
-<p>It&rsquo;s best to read in order, as later pages in the Getting Started Guide build on concepts introduced earlier.</p>
-<p>Thanks for trying out sbt and <em>have fun</em>!</p>
+<h2><a href="#cross-building-plugins" name="cross-building-plugins" class="anchor"><span class="anchor-link"></span></a>Cross-building Plugins</h2>
+<p>Like we are able to cross build against multiple Scala versions, we can cross-build sbt 1.0 plugins while staying on sbt 0.13 (and build 0.13 plugins from 1.0). This is useful because we can port one plugin at a time.</p>
+<h3><a href="#enabling-cross-building" name="enabling-cross-building" class="anchor"><span class="anchor-link"></span></a>Enabling cross-building</h3>
+<p>sbt 0.13.16 added a new <code>crossSbtVersions</code> setting, which acts in a similar way to <code>crossScalaVersions</code>, and two new commands (<code>^</code> and <code>^^</code>) to switch the target sbt version.</p>
+<pre class="prettyprint"><code class="language-scala">crossSbtVersions := Seq(&quot;0.13.16&quot;, &quot;1.0.2&quot;)
+</code></pre>
+<p>We can now target sbt 1.0.2 using:</p>
+<pre><code>&gt; ^^1.0.2
+[info] Setting `sbtVersion in pluginCrossBuild` to 1.0.2
+</code></pre>
+<p>Tasks can also be run against all cross-build sbt versions using <code>^^</code>:</p>
+<pre><code>&gt; ^compile
+[info] Setting `sbtVersion in pluginCrossBuild` to 0.13.16
+[info] Compiling 25 Scala sources to /home/sbt/example-plugin/target/scala-2.10/sbt-0.13/classes ...
+...
+[info] Setting `sbtVersion in pluginCrossBuild` to 1.0.2
+[info] Compiling 25 Scala sources to /home/sbt/example-plugin/target/scala-2.12/sbt-1.0/classes ...
+</code></pre>
+<h3><a href="#version-specific-code" name="version-specific-code" class="anchor"><span class="anchor-link"></span></a>Version specific code</h3>
+<p>While most APIs are the same in sbt 0.13 and 1.0 there are some changes require differing code paths. When building a cross-build plugin, sbt provides additional Scala source directories specific to the target sbt version:</p>
+<pre><code>src/main/scala
+src/main/scala-sbt-0.13
+src/main/scala-sbt-1.0
+</code></pre>
+<p>When compiling for sbt 1.0 the <code>src/main/scala</code> and <code>src/main/scala-sbt-1.0</code> directories will be used (and conversely for sbt 0.13 <code>src/main/scala-sbt-0.13</code> will be used).</p><div class="callout note "><div class="callout-title">Note</div>
+<p>You should aim to keep the amount of sbt version specific code to a minimum.</p></div>
+<h3><a href="#sbt-compat" name="sbt-compat" class="anchor"><span class="anchor-link"></span></a>sbt-compat</h3>
+<p><a href="https://github.com/dwijnand/sbt-compat">sbt-compat</a> is a compatibility layer that aims to plug the gap in APIs between sbt 0.13 and sbt 1.0. Adding this plugin to your cross-build plugin will allow you to use some of the new sbt 1.0 APIs when building for sbt 0.13.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/getting-started/index.md">here</a>.
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/plugin-developers/cross-building.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../getting-started/setup.html">Installing sbt</a></p>
+<p><strong>Next:</strong> <a href="../developing-sbt/index.html">Developing sbt</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../plugin-developers/cross-building.html#cross-building-plugins" class="header">Cross-building Plugins</a>
+  <ul>
+    <li><a href="../plugin-developers/cross-building.html#enabling-cross-building" class="header">Enabling cross-building</a></li>
+    <li><a href="../plugin-developers/cross-building.html#version-specific-code" class="header">Version specific code</a></li>
+    <li><a href="../plugin-developers/cross-building.html#sbt-compat" class="header">sbt-compat</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 

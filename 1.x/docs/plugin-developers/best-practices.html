@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title>Best Practices · sbt Reference Manual</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='website'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/page.js"></script>
+<script type="text/javascript" src="../js/groups.js"></script>
+<link rel="stylesheet" type="text/css" href="../lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="../css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="../images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="active page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="../index.html">sbt Reference Manual</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="active page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="../index.html">sbt Reference Manual</a></li>
+  <li><a href="../plugin-developers/index.html">sbt for Plugin Developers</a></li>
+  <li>Best Practices</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h2><a href="#best-practices" name="best-practices" class="anchor"><span class="anchor-link"></span></a>Best Practices</h2>
+<p><em>This page is intended primarily for sbt plugin authors.</em> This page assumes you&rsquo;ve read <a href="Using-Plugins.html">using plugins</a> and <a href="Plugins.html">Plugins</a>.</p>
+<p>A plugin developer should strive for consistency and ease of use. Specifically:</p>
+<ul>
+  <li>Plugins should play well with other plugins. Avoiding namespace clashes (in both sbt and Scala) is paramount.</li>
+  <li>Plugins should follow consistent conventions. The experiences of an sbt <em>user</em> should be consistent, no matter what plugins are pulled in.</li>
+</ul>
+<p>Here are some current plugin best practices.</p><div class="callout note "><div class="callout-title">Note</div>
+<p>Best practices are evolving, so check back frequently.</p></div>
+<h3><a href="#get-your-plugins-known" name="get-your-plugins-known" class="anchor"><span class="anchor-link"></span></a>Get your plugins known</h3>
+<p>Make sure people can find your plugin. Here are some of the recommended steps:</p>
+<ol>
+  <li>Mention <a href="https://twitter.com/scala_sbt">@scala_sbt</a> in your announcement, and we will RT it.</li>
+  <li>Send a pull req to <a href="https://github.com/sbt/website">sbt/website</a> and add your plugin on <a href="Community-Plugins.html">the plugins list</a>.</li>
+</ol>
+<h3><a href="#dont-use-default-package" name="dont-use-default-package" class="anchor"><span class="anchor-link"></span></a>Don&rsquo;t use default package</h3>
+<p>Users who have their build files in some package will not be able to use your plugin if it&rsquo;s defined in default (no-name) package.</p>
+<h3><a href="#follow-the-naming-conventions" name="follow-the-naming-conventions" class="anchor"><span class="anchor-link"></span></a>Follow the naming conventions</h3>
+<p>Use the <code>sbt-$projectname</code> scheme to name your library and artifact. A plugin ecosystem with a consistent naming convention makes it easier for users to tell whether a project or dependency is an SBT plugin.</p>
+<p>If the project&rsquo;s name is <code>foobar</code> the following holds:</p>
+<ul>
+  <li>BAD: <code>foobar</code></li>
+  <li>BAD: <code>foobar-sbt</code></li>
+  <li>BAD: <code>sbt-foobar-plugin</code></li>
+  <li>GOOD: <code>sbt-foobar</code></li>
+</ul>
+<p>If your plugin provides an obvious &ldquo;main&rdquo; task, consider naming it <code>foobar</code> or <code>foobar...</code> to make it more intuitive to explore the capabilities of your plugin within the sbt shell and tab-completion.</p>
+<h3><a href="#use-settings-and-tasks-avoid-commands-" name="use-settings-and-tasks-avoid-commands-" class="anchor"><span class="anchor-link"></span></a>Use settings and tasks. Avoid commands.</h3>
+<p>Your plugin should fit in naturally with the rest of the sbt ecosystem. The first thing you can do is to avoid defining <a href="Commands.html">commands</a>, and use settings and <a href="Tasks.html">tasks</a> and task-scoping instead (see below for more on task-scoping). Most of the interesting things in sbt like <code>compile</code>, <code>test</code> and <code>publish</code> are provided using tasks. Tasks can take advantage of duplication reduction and parallel execution by the task engine. With features like <a href="Tasks.html#ScopeFilter">ScopeFilter</a>, many of the features that previously required commands are now possible using tasks.</p>
+<p>Settings can be composed from other settings and tasks. Tasks can be composed from other tasks and input tasks. Commands, on the other hand, cannot be composed from any of the above. In general, use the minimal thing that you need. One legitimate use of commands may be using plugin to access the build definition itself not the code. sbt-inspectr was implemented using <a href="https://github.com/eed3si9n/sbt-inspectr/blob/aa88bfac609e4668d0ad8ac220e4ef5fb1c3b9f5/src/main/scala/sbtinspectr/InspectrCommand.scala">a command</a> before it became <code>inspect tree</code>.</p>
+<h3><a href="#reuse-existing-keys" name="reuse-existing-keys" class="anchor"><span class="anchor-link"></span></a>Reuse existing keys</h3>
+<p>sbt has a number of <a href="../api/sbt/Keys%24.html">predefined keys</a>. Where possible, reuse them in your plugin.</p>
+<p>For instance, don&rsquo;t define:</p>
+<pre class="prettyprint"><code class="language-scala">val sourceFiles = settingKey[Seq[File]](&quot;Some source files&quot;)
+</code></pre>
+<p>Instead, simply reuse sbt&rsquo;s existing <code>sources</code> key.</p>
+<h3><a href="#avoid-namespace-clashes" name="avoid-namespace-clashes" class="anchor"><span class="anchor-link"></span></a>Avoid namespace clashes</h3>
+<p>Sometimes, you need a new key, because there is no existing sbt key. In this case, use a plugin-specific prefix.</p>
+<pre class="prettyprint"><code class="language-scala">package sbtobfuscate
+
+import sbt._, Keys._
+
+object ObfuscatePlugin extends sbt.AutoPlugin {
+  object autoImport {
+    lazy val obfuscateStylesheet = settingKey[File](&quot;obfuscate stylesheet&quot;)
+  }
+}
+</code></pre>
+<p>In this approach, every <code>lazy val</code> starts with <code>obfuscate</code>. A user of the plugin would refer to the settings like this:</p>
+<pre class="prettyprint"><code class="language-scala">obfuscateStylesheet := file(&quot;something.txt&quot;)
+</code></pre>
+<h3><a href="#provide-core-feature-in-a-plain-old-scala-object" name="provide-core-feature-in-a-plain-old-scala-object" class="anchor"><span class="anchor-link"></span></a>Provide core feature in a plain old Scala object</h3>
+<p>The core feature of sbt&rsquo;s <code>package</code> task, for example, is implemented in <a href="../api/#sbt.Package%24">sbt.Package</a>, which can be called via its <code>apply</code> method. This allows greater reuse of the feature from other plugins such as sbt-assembly, which in return implements <code>sbtassembly.Assembly</code> object to implement its core feature.</p>
+<p>Follow their lead, and provide core feature in a plain old Scala object.</p>
+<h3><a href="#configuration-advices" name="configuration-advices" class="anchor"><span class="anchor-link"></span></a>Configuration advices</h3>
+<p>If your plugin introduces either a new set of source code or its own library dependencies, only then you want your own configuration.</p>
+<h4><a href="#you-probably-wont-need-your-own-configuration" name="you-probably-wont-need-your-own-configuration" class="anchor"><span class="anchor-link"></span></a>You probably won&rsquo;t need your own configuration</h4>
+<p>Configurations should <em>not</em> be used to namespace keys for a plugin. If you&rsquo;re merely adding tasks and settings, don&rsquo;t define your own configuration. Instead, reuse an existing one <em>or</em> scope by the main task (see below).</p>
+<pre class="prettyprint"><code class="language-scala">package sbtwhatever
+
+import sbt._, Keys._
+
+object WhateverPlugin extends sbt.AutoPlugin {
+  override def requires = plugins.JvmPlugin
+  override def trigger = allRequirements
+
+  object autoImport {
+    // BAD sample
+    lazy val Whatever = config(&quot;whatever&quot;) extend(Compile)
+    lazy val dude = settingKey[String](&quot;A plugin specific key&quot;)
+  }
+  import autoImport._
+  override lazy val projectSettings = Seq(
+    dude in Whatever := &quot;your opinion man&quot; // DON&#39;T DO THIS
+  )
+}
+</code></pre>
+<h4><a href="#when-to-define-your-own-configuration" name="when-to-define-your-own-configuration" class="anchor"><span class="anchor-link"></span></a>When to define your own configuration</h4>
+<p>If your plugin introduces either a new set of source code or its own library dependencies, only then you want your own configuration. For instance, suppose you&rsquo;ve built a plugin that performs fuzz testing that requires its own fuzzing library and fuzzing source code. <code>scalaSource</code> key can be reused similar to <code>Compile</code> and <code>Test</code> configuration, but <code>scalaSource</code> scoped to <code>Fuzz</code> configuration (denoted as <code>scalaSource in Fuzz</code>) can point to <code>src/fuzz/scala</code> so it is distinct from other Scala source directories. Thus, these three definitions use the same <em>key</em>, but they represent distinct <em>values</em>. So, in a user&rsquo;s <code>build.sbt</code>, we might see:</p>
+<pre class="prettyprint"><code class="language-scala">scalaSource in Fuzz := baseDirectory.value / &quot;source&quot; / &quot;fuzz&quot; / &quot;scala&quot;
+
+scalaSource in Compile := baseDirectory.value / &quot;source&quot; / &quot;main&quot; / &quot;scala&quot;
+</code></pre>
+<p>In the fuzzing plugin, this is achieved with an <code>inConfig</code> definition:</p>
+<pre class="prettyprint"><code class="language-scala">package sbtfuzz
+
+import sbt._, Keys._
+
+object FuzzPlugin extends sbt.AutoPlugin {
+  override def requires = plugins.JvmPlugin
+  override def trigger = allRequirements
+
+  object autoImport {
+    lazy val Fuzz = config(&quot;fuzz&quot;) extend(Compile)
+  }
+  import autoImport._
+
+  lazy val baseFuzzSettings: Seq[Def.Setting[_]] = Seq(
+    test := {
+      println(&quot;fuzz test&quot;)
+    }
+  )
+  override lazy val projectSettings = inConfig(Fuzz)(baseFuzzSettings)
+}
+</code></pre>
+<p>When defining a new type of configuration, e.g.</p>
+<pre class="prettyprint"><code class="language-scala">lazy val Fuzz = config(&quot;fuzz&quot;) extend(Compile)
+</code></pre>
+<p>should be used to create a configuration. Configurations actually tie into dependency resolution (with Ivy) and can alter generated pom files.</p>
+<h4><a href="#playing-nice-with-configurations" name="playing-nice-with-configurations" class="anchor"><span class="anchor-link"></span></a>Playing nice with configurations</h4>
+<p>Whether you ship with a configuration or not, a plugin should strive to support multiple configurations, including those created by the build user. Some tasks that are tied to a particular configuration can be re-used in other configurations. While you may not see the need immediately in your plugin, some project may and will ask you for the flexibility.</p>
+<h4><a href="#provide-raw-settings-and-configured-settings" name="provide-raw-settings-and-configured-settings" class="anchor"><span class="anchor-link"></span></a>Provide raw settings and configured settings</h4>
+<p>Split your settings by the configuration axis like so:</p>
+<pre class="prettyprint"><code class="language-scala">package sbtobfuscate
+
+import sbt._, Keys._
+
+object ObfuscatePlugin extends sbt.AutoPlugin {
+  override def requires = plugins.JvmPlugin
+  override def trigger = allRequirements
+
+  object autoImport {
+    lazy val obfuscate = taskKey[Seq[File]](&quot;obfuscate the source&quot;)
+    lazy val obfuscateStylesheet = settingKey[File](&quot;obfuscate stylesheet&quot;)
+  }
+  import autoImport._
+  lazy val baseObfuscateSettings: Seq[Def.Setting[_]] = Seq(
+    obfuscate := Obfuscate((sources in obfuscate).value),
+    sources in obfuscate := sources.value
+  )
+  override lazy val projectSettings = inConfig(Compile)(baseObfuscateSettings)
+}
+
+// core feature implemented here
+object Obfuscate {
+  def apply(sources: Seq[File]): Seq[File] = {
+    sources
+  }
+}
+</code></pre>
+<p>The <code>baseObfuscateSettings</code> value provides base configuration for the plugin&rsquo;s tasks. This can be re-used in other configurations if projects require it. The <code>obfuscateSettings</code> value provides the default <code>Compile</code> scoped settings for projects to use directly. This gives the greatest flexibility in using features provided by a plugin. Here&rsquo;s how the raw settings may be reused:</p>
+<pre class="prettyprint"><code class="language-scala">import sbtobfuscate.ObfuscatePlugin
+
+lazy val app = (project in file(&quot;app&quot;))
+  .settings(inConfig(Test)(ObfuscatePlugin.baseObfuscateSettings))
+</code></pre>
+<h4><a href="#using-a-task-scope-for-settings" name="using-a-task-scope-for-settings" class="anchor"><span class="anchor-link"></span></a>Using a &ldquo;main&rdquo; task scope for settings</h4>
+<p>Sometimes you want to define some settings for a particular &ldquo;main&rdquo; task in your plugin. In this instance, you can scope your settings using the task itself. See the <code>baseObfuscateSettings</code>:</p>
+<pre class="prettyprint"><code class="language-scala">  lazy val baseObfuscateSettings: Seq[Def.Setting[_]] = Seq(
+    obfuscate := Obfuscate((sources in obfuscate).value),
+    sources in obfuscate := sources.value
+  )
+</code></pre>
+<p>In the above example, <code>sources in obfuscate</code> is scoped under the main task, <code>obfuscate</code>.</p>
+<h3><a href="#mucking-with-globalsettings" name="mucking-with-globalsettings" class="anchor"><span class="anchor-link"></span></a>Mucking with <code>globalSettings</code></h3>
+<p>There may be times when you need to muck with <code>globalSettings</code>. The general rule is <em>be careful what you touch</em>.</p>
+<p>When overriding global settings, care should be taken to ensure previous settings from other plugins are not ignored. e.g. when creating a new <code>onLoad</code> handler, ensure that the previous <code>onLoad</code> handler is not removed.</p>
+<pre class="prettyprint"><code class="language-scala">package sbtsomething
+
+import sbt._, Keys._
+
+object MyPlugin extends AutoPlugin {
+  override def requires = plugins.JvmPlugin
+  override def trigger = allRequirements
+
+  override val globalSettings: Seq[Def.Setting[_]] = Seq(
+    onLoad in Global := (onLoad in Global).value andThen { state =&gt;
+      ... return new state ...
+    }
+  )
+}
+</code></pre>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/plugin-developers/best-practices.md">here</a>.
+</div>
+
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="../plugin-developers/cross-building.html">Cross-building Plugins</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../plugin-developers/best-practices.html#best-practices" class="header">Best Practices</a>
+  <ul>
+    <li><a href="../plugin-developers/best-practices.html#get-your-plugins-known" class="header">Get your plugins known</a></li>
+    <li><a href="../plugin-developers/best-practices.html#dont-use-default-package" class="header">Don&rsquo;t use default package</a></li>
+    <li><a href="../plugin-developers/best-practices.html#follow-the-naming-conventions" class="header">Follow the naming conventions</a></li>
+    <li><a href="../plugin-developers/best-practices.html#use-settings-and-tasks-avoid-commands-" class="header">Use settings and tasks. Avoid commands.</a></li>
+    <li><a href="../plugin-developers/best-practices.html#reuse-existing-keys" class="header">Reuse existing keys</a></li>
+    <li><a href="../plugin-developers/best-practices.html#avoid-namespace-clashes" class="header">Avoid namespace clashes</a></li>
+    <li><a href="../plugin-developers/best-practices.html#provide-core-feature-in-a-plain-old-scala-object" class="header">Provide core feature in a plain old Scala object</a></li>
+    <li><a href="../plugin-developers/best-practices.html#configuration-advices" class="header">Configuration advices</a></li>
+    <li><a href="../plugin-developers/best-practices.html#mucking-with-globalsettings" class="header">Mucking with <code>globalSettings</code></a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2017</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="../lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="../js/magellan.js"></script>
+
+<style type="text/css">@import "../lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="../lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>

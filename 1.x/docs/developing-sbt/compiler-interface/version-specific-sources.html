@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>macOS · sbt Reference Manual</title>
+<title>Fetching the most specific sources · sbt Reference Manual</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='website'/>
@@ -131,9 +131,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-breadcrumbs">
 <ul>
   <li><a href="../../index.html">sbt Reference Manual</a></li>
-  <li><a href="../../getting-started/index.html">Getting Started with sbt</a></li>
-  <li><a href="../../getting-started/setup.html">Installing sbt</a></li>
-  <li>macOS Setup</li>
+  <li><a href="../../developing-sbt/index.html">Developing sbt</a></li>
+  <li><a href="../../developing-sbt/compiler-interface/index.html">Compiler Interface</a></li>
+  <li>Fetching the most specific sources</li>
 </ul>
 </div>
 </div>
@@ -141,38 +141,33 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h2><a href="#macos-setup" name="macos-setup" class="anchor"><span class="anchor-link"></span></a>macOS Setup</h2>
-<p>Download <a href="$sbt_native_package_base$$app_version$/sbt-$app_version$.zip">ZIP</a> or <a href="$sbt_native_package_base$$app_version$/sbt-$app_version$.tgz">TGZ</a> package, and expand it.</p>
-<h3><a href="#installing-from-a-third-party-package" name="installing-from-a-third-party-package" class="anchor"><span class="anchor-link"></span></a>Installing from a third-party package</h3><div class="callout note "><div class="callout-title">Note</div>
-<p>Third-party packages may not provide the latest version. Please make sure to report any issues with these packages to the relevant maintainers.</p></div>
-<h4><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="https://brew.sh">Homebrew</a></h4>
-<pre class="prettyprint"><code class="language-shell">$ brew install sbt@1
-</code></pre>
-<h4><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="https://macports.org/">Macports</a></h4>
-<pre class="prettyprint"><code class="language-shell">$ port install sbt
-</code></pre>
+<h2><a href="#fetching-the-most-specific-sources" name="fetching-the-most-specific-sources" class="anchor"><span class="anchor-link"></span></a>Fetching the most specific sources</h2>
+<p>Because the compiler interface is recompiled against each Scala version in use in your project, its source must stay compatible with all the Scala versions that sbt supports (from Scala 2.8 to the latest version of Scala).</p>
+<p>This comes at great cost for both the sbt maintainers and the Scala compiler authors:</p>
+<ol>
+  <li>The compiler authors cannot remove old and deprecated public APIs from the Scala compiler.</li>
+  <li>sbt cannot use new APIs defined in the Scala compiler.</li>
+  <li>sbt must implement <a href="https://github.com/sbt/sbt/blob/0.13/compile/interface/src/main/scala/xsbt/Compat.scala#L6">all kinds of hackery</a> to remain source-compatible with all versions of the Scala compiler  and support new features.</li>
+</ol>
+<p>To circumvent this problem, a new mechanism that allows sbt to fetch the version of the sources for the compiler interface that are the most specific for the Scala version in use has been implemented in sbt.</p>
+<p>For instance, for a project that is compiled using Scala 2.11.8-M2, sbt will look for the following version of the sources for the compiler interface, in this order:</p>
+<ol>
+  <li>2.11.8-M2</li>
+  <li>2.11.8</li>
+  <li>2.11</li>
+  <li>The default sources.</li>
+</ol>
+<p>This new mechanism allows both the Scala compiler and sbt to move forward and enjoy new APIs while being certain than users of older versions of Scala will still be able to use sbt.</p>
+<p>Finally, another advantage of this technique is that it relies on Ivy to retrieve the sources of the compiler bridge, but can be easily ported for use with Maven, which is the distribution mechanism that the sbt maintainers would like to use to distribute sbt&rsquo;s modules.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/getting-started/setup/macos.md">here</a>.
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/developing-sbt/compiler-interface/version-specific-sources.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../../getting-started/setup/linux.html">Linux Setup</a></p>
+<p><strong>Next:</strong> <a href="../../developing-sbt/launcher/index.html">sbt Launcher</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
-<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
-<div class="page-nav">
-<div class="nav-title">On this page:</div>
-<div class="nav-toc">
-<ul>
-  <li><a href="../../getting-started/setup/macos.html#macos-setup" class="header">macOS Setup</a>
-  <ul>
-    <li><a href="../../getting-started/setup/macos.html#installing-from-a-third-party-package" class="header">Installing from a third-party package</a></li>
-  </ul></li>
-</ul>
-</div>
-</div>
-</nav>
 </div>
 </div>
 

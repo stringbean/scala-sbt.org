@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title>Core Principles · sbt Reference Manual</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='website'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/page.js"></script>
+<script type="text/javascript" src="../../js/groups.js"></script>
+<link rel="stylesheet" type="text/css" href="../../lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../../lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="../../images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="../../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="../../index.html">sbt Reference Manual</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="../../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="../../index.html">sbt Reference Manual</a></li>
+  <li><a href="../../developing-sbt/index.html">Developing sbt</a></li>
+  <li><a href="../../developing-sbt/developer-notes/index.html">Developer Notes</a></li>
+  <li>Core Principles</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h2><a href="#core-principles" name="core-principles" class="anchor"><span class="anchor-link"></span></a>Core Principles</h2>
+<p>This document details the core principles overarching sbt&rsquo;s design and code style. sbt&rsquo;s core principles can be stated quite simply:</p>
+<ol>
+  <li>Everything should have a <code>Type</code>, enforced as much as is practical.</li>
+  <li>Dependencies should be <strong>explicit</strong>.</li>
+  <li>Once learned, a concept should hold throughout <strong>all</strong> parts of sbt.</li>
+  <li>Parallel is the default.</li>
+</ol>
+<p>With these principles in mind, let&rsquo;s walk through the core design of sbt.</p>
+<h3><a href="#introduction-to-build-state" name="introduction-to-build-state" class="anchor"><span class="anchor-link"></span></a>Introduction to build state</h3>
+<p>This is the first piece you hit when starting sbt. sbt&rsquo;s command engine is the means by which it processes user requests using the build state. The command engine is essentially a means of applying <strong>state transformations</strong> on the build state, to execute user requests.</p>
+<p>In sbt, commands are functions that take the current build state (<code>sbt.State</code>) and produce the next state. In other words, they are essentially functions of <code>sbt.State =&gt; sbt.State</code>. However, in reality, Commands are actually string processors which take some string input and act on it, returning the next build state.</p>
+<p>So, the entirety of sbt is driven off the <code>sbt.State</code> class. Since this class needs to be resilient in the face of custom code and plugins, it needs a mechanism to store the state from any potential client. In dynamic languages, this can be done directly on objects.</p>
+<p>A naive approach in Scala is to use a <code>Map&lt;String,Any&gt;</code>. However, this violates tenant #1: Everything should have a <code>Type</code>. So, sbt defines a new type of map called an <code>AttributeMap</code>. An <code>AttributeMap</code> is a key-value storage mechanism where keys are both strings <em>and</em> expected <code>Type</code>s for their value.</p>
+<p>Here is what the type-safe <code>AttributeKey</code> key looks like :</p>
+<pre class="prettyprint"><code class="language-scala">sealed trait AttributeKey[T] {
+  /** The label is the identifier for the key and is camelCase by convention. */
+  def label: String
+  /** The runtime evidence for ``T`` */
+  def manifest: Manifest[T]
+}
+</code></pre>
+<p>These keys store both a <code>label</code> (<code>string</code>) and some runtime type information (<code>manifest</code>). To put or get something on the <code>AttributeMap</code>, we first need to construct one of these keys. Let&rsquo;s look at the basic definition of the <code>AttributeMap</code>:</p>
+<pre class="prettyprint"><code class="language-scala">trait AttributeMap {
+  /** Gets the value of type ``T`` associated with the key ``k`` or ``None`` if no value is associated.
+  * If a key with the same label but a different type is defined, this method will return ``None``. */
+  def get[T](k: AttributeKey[T]): Option[T]
+
+  /** Adds the mapping ``k -&gt; value`` to this map, replacing any existing mapping for ``k``.
+  * Any mappings for keys with the same label but different types are unaffected. */
+  def put[T](k: AttributeKey[T], value: T): AttributeMap
+}
+</code></pre>
+<p>Now that there&rsquo;s a definition of what build state is, there needs to be a way to dynamically construct it. In sbt, this is done through the <code>Setting[_]</code> sequence.</p>
+<h3><a href="#settings-architecture" name="settings-architecture" class="anchor"><span class="anchor-link"></span></a>Settings Architecture</h3>
+<p>A Setting represents the means of constructing the value of one particular <code>AttributeKey[_]</code> in the <code>AttributeMap</code> of build state. A setting consists of two pieces:</p>
+<ol>
+  <li>The <code>AttributeKey[T]</code> where the value of the setting should be assigned.</li>
+  <li>An <code>Initialize[T]</code> object which is able to construct the value for this setting.</li>
+</ol>
+<p>sbt&rsquo;s initialization time is basically just taking a sequence of these <code>Setting[_]</code> objects and running their initialization objects and then storing the value into the <code>AttributeMap</code>. This means overwriting an existing value at a key is as easy as appending a <code>Setting[_]</code> to the end of the sequence which does so.</p>
+<p>Where it gets interesting is that <code>Initialize[T]</code> can depend on other <code>AttributeKey[_]</code>s in the build state. Each <code>Initialize[_]</code> can pull values from any <code>AttributeKey[_]</code> in the build state&rsquo;s <code>AttributeMap</code> to compute its value. sbt ensures a few things when it comes to <code>Initialize[_]</code> dependencies:</p>
+<ol>
+  <li>There can be no circular dependencies</li>
+  <li>If one <code>Initialize[_]</code> depends on another <code>Initialize[_]</code> key, then <em>all</em> associated <code>Initialize[_]</code> blocks for that  key must have run before we load the value.</li>
+</ol>
+<p>Let&rsquo;s look at what gets stored for the setting :</p>
+<pre class="prettyprint"><code class="language-scala">normalizedName := normalize(name.value)
+</code></pre>
+<p><img src="/1.x/docs/files/overview-setting-example.png" alt="Settings overview" /></p>
+<p>Here, a <code>Setting[_]</code> is constructed that understands it depends on the value in the <code>name</code> <code>AttributeKey</code>. Its initialize block first grabs the value of the <code>name</code> key, then runs the function <code>normalize</code> on it to compute its value.</p>
+<p>This represents the core mechanism of how to construct sbt&rsquo;s build state. Conceptually, at some point we have a graph of dependencies and initialization functions which we can use to construct the first build state. Once this is completed, we can then start to process user requests.</p>
+<h3><a href="#task-architecture" name="task-architecture" class="anchor"><span class="anchor-link"></span></a>Task Architecture</h3>
+<p>The next layer in sbt is around these user requests, or tasks. When a user configures a build, they are defining a set of repeatable tasks that they can run on their project. Things like <code>compile</code> or <code>test</code>. These tasks <em>also</em> have a dependency graph, where e.g. the <code>test</code> task requires that <code>compile</code> has run before it can successfully execute.</p>
+<p>sbt defines a class <code>Task[T]</code>. The <code>T</code> type parameter represents the type of data returned by a task. Remember the tenets of sbt? &ldquo;All things have types&rdquo; and &ldquo;Dependencies are explicit&rdquo; both hold true for tasks. sbt promotes a style of task dependencies that is closer to functional programming: return data for your users rather than using shared mutable state.</p>
+<p>Most build tools communicate over the filesystem, and indeed by necessity sbt does some of this. However, for stable parallelization it is far better to keep tasks isolated on the filesystem and communicate directly through types.</p>
+<p>Similarly to how a <code>Setting[_]</code> stores both dependencies and an initialization function, a <code>Task[_]</code> stores both its <code>Task[_]</code>dependencies and its behavior (a function).</p>
+<p><em>TODO - More on <code>Task[_]</code></em></p>
+<p><em>TODO - Transition into <code>InputTask[_]</code>, rehash Command</em></p>
+<p><em>TODO - Transition into Scope.</em></p>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/developing-sbt/developer-notes/core-principles.md">here</a>.
+</div>
+
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="../../developing-sbt/developer-notes/settings-core.html">Settings Core</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../developing-sbt/developer-notes/core-principles.html#core-principles" class="header">Core Principles</a>
+  <ul>
+    <li><a href="../../developing-sbt/developer-notes/core-principles.html#introduction-to-build-state" class="header">Introduction to build state</a></li>
+    <li><a href="../../developing-sbt/developer-notes/core-principles.html#settings-architecture" class="header">Settings Architecture</a></li>
+    <li><a href="../../developing-sbt/developer-notes/core-principles.html#task-architecture" class="header">Task Architecture</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2017</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="../../lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="../../js/magellan.js"></script>
+
+<style type="text/css">@import "../../lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="../../lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="../../lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>

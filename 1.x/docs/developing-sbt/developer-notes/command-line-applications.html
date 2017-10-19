@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>macOS · sbt Reference Manual</title>
+<title> · sbt Reference Manual</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='website'/>
@@ -131,9 +131,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-breadcrumbs">
 <ul>
   <li><a href="../../index.html">sbt Reference Manual</a></li>
-  <li><a href="../../getting-started/index.html">Getting Started with sbt</a></li>
-  <li><a href="../../getting-started/setup.html">Installing sbt</a></li>
-  <li>macOS Setup</li>
+  <li><a href="../../developing-sbt/index.html">Developing sbt</a></li>
+  <li><a href="../../developing-sbt/developer-notes/index.html">Developer Notes</a></li>
+  <li>Command Line Applications</li>
 </ul>
 </div>
 </div>
@@ -141,22 +141,109 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h2><a href="#macos-setup" name="macos-setup" class="anchor"><span class="anchor-link"></span></a>macOS Setup</h2>
-<p>Download <a href="$sbt_native_package_base$$app_version$/sbt-$app_version$.zip">ZIP</a> or <a href="$sbt_native_package_base$$app_version$/sbt-$app_version$.tgz">TGZ</a> package, and expand it.</p>
-<h3><a href="#installing-from-a-third-party-package" name="installing-from-a-third-party-package" class="anchor"><span class="anchor-link"></span></a>Installing from a third-party package</h3><div class="callout note "><div class="callout-title">Note</div>
-<p>Third-party packages may not provide the latest version. Please make sure to report any issues with these packages to the relevant maintainers.</p></div>
-<h4><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="https://brew.sh">Homebrew</a></h4>
-<pre class="prettyprint"><code class="language-shell">$ brew install sbt@1
+<h2><a href="#creating-command-line-applications-using-sbt" name="creating-command-line-applications-using-sbt" class="anchor"><span class="anchor-link"></span></a>Creating Command Line Applications Using sbt</h2>
+<p>There are several components of sbt that may be used to create a command line application. The <a href="../launcher/index.html">launcher</a> and the <a href="Commands.html">command system</a> are the two main ones illustrated here.</p>
+<p>As described on the <a href="../launcher/index.html">launcher page</a>, a launched application implements the <code>xsbti.AppMain</code> interface and defines a brief configuration file that users pass to the launcher to run the application. To use the command system, an application sets up a <a href="Build-State.html">State</a> instance that provides <a href="Commands.html">command implementations</a> and the initial commands to run. A minimal hello world example is given below.</p>
+<h3><a href="#hello-world-example" name="hello-world-example" class="anchor"><span class="anchor-link"></span></a>Hello World Example</h3>
+<p>There are three files in this example:</p>
+<ul>
+  <li><code>build.sbt</code></li>
+  <li><code>Main.scala</code></li>
+  <li><code>hello.build.properties</code></li>
+</ul>
+<p>To try out this example:</p>
+<ol>
+  <li>Put the first two files in a new directory</li>
+  <li>In sbt&rsquo;s shell run <code>publishLocal</code> in that directory</li>
+  <li>Run <code>sbt @path/to/hello.build.properties</code> to run the application.</li>
+</ol>
+<p>Like for sbt itself, you can specify commands from the command line (batch mode) or run them at an prompt (interactive  mode).</p>
+<h4><a href="#build-definition-build-sbt" name="build-definition-build-sbt" class="anchor"><span class="anchor-link"></span></a>Build Definition: <code>build.sbt</code></h4>
+<p>The <code>build.sbt</code> file should define the standard settings: <code>name</code>, <code>version</code>, and <code>organization</code>. To use the sbt command system, a dependency on the <code>command</code> module is needed. To use the task system, add a dependency on the <code>task-system</code> module as well.</p>
+<pre class="prettyprint"><code class="language-scala">organization := &quot;org.example&quot;
+name := &quot;hello&quot;
+version := &quot;0.1-SNAPSHOT&quot;
+libraryDependencies += &quot;org.scala-sbt&quot; % &quot;command&quot; % &quot;0.12.0&quot;
 </code></pre>
-<h4><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="https://macports.org/">Macports</a></h4>
-<pre class="prettyprint"><code class="language-shell">$ port install sbt
+<h4><a href="#application-main-scala" name="application-main-scala" class="anchor"><span class="anchor-link"></span></a>Application: <code>Main.scala</code></h4>
+<p>The application itself is defined by implementing <a href="../api/xsbti/AppMain.html">xsbti.AppMain</a>. The basic steps are:</p>
+<ol>
+  <li>Provide command definitions. These are the commands that are available for users to run.</li>
+  <li>Define initial commands. These are the commands that are initially scheduled to run. For example, an application will  typically add anything specified on the command line (what sbt calls batch mode) and if no commands are defined, enter  interactive mode by running the &lsquo;shell&rsquo; command.</li>
+  <li>Set up logging. The default setup in the example rotates the log file after each user interaction and sends brief  logging to the console and verbose logging to the log file.</li>
+</ol>
+<pre class="prettyprint"><code class="language-scala">package org.example
+
+import sbt._
+import java.io.{File, PrintWriter}
+
+final class Main extends xsbti.AppMain {
+  /** Defines the entry point for the application.
+   * The call to `initialState` sets up the application.
+   * The call to runLogged starts command processing.
+   */
+  def run(configuration: xsbti.AppConfiguration): xsbti.MainResult =
+    MainLoop.runLogged( initialState(configuration) )
+
+  /** Sets up the application by constructing an initial State instance with the
+   * supported commands and initial commands to run.  See the State API documentation
+   * for details.
+   */
+  def initialState(configuration: xsbti.AppConfiguration): State = {
+    val commandDefinitions = hello +: BasicCommands.allBasicCommands
+    val commandsToRun = Hello +: &quot;iflast shell&quot; +: configuration.arguments.map(_.trim)
+    State(
+      configuration,
+      commandDefinitions,
+      Set.empty,
+      None,
+      commandsToRun,
+      State.newHistory,
+      AttributeMap.empty,
+      initialGlobalLogging,
+      State.Continue
+    )
+  }
+
+  // defines an example command.  see the Commands page for details.
+  val Hello = &quot;hello&quot;
+  val hello = Command.command(Hello) { s =&gt;
+    s.log.info(&quot;Hello!&quot;)
+    s
+  }
+
+  /** Configures logging to log to a temporary backing file as well as to the console.
+   * An application would need to do more here to customize the logging level and
+   * provide access to the backing file (like sbt&#39;s last command and logLevel setting).
+   */
+  def initialGlobalLogging: GlobalLogging =
+    GlobalLogging.initial(MainLogging.globalDefault _, File.createTempFile(&quot;hello&quot;, &quot;log&quot;))
+}
+</code></pre>
+<h4><a href="#launcher-configuration-file-hello-build-properties" name="launcher-configuration-file-hello-build-properties" class="anchor"><span class="anchor-link"></span></a>Launcher configuration file: <code>hello.build.properties</code></h4>
+<p>The launcher needs a configuration file in order to retrieve and run an application. <code>hello.build.properties</code>:</p>
+<pre><code>[scala]
+  version: 2.9.1
+
+[app]
+  org: org.example
+  name: hello
+  version: 0.1-SNAPSHOT
+  class: org.example.Main
+  components: xsbti
+  cross-versioned: true
+
+[repositories]
+  local
+  maven-central
+  typesafe-ivy-releases: http://repo.typesafe.com/typesafe/ivy-releases/, [organization]/[module]/[revision]/[type]s/[artifact](-[classifier]).[ext]
 </code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/getting-started/setup/macos.md">here</a>.
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/developing-sbt/developer-notes/command-line-applications.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../../getting-started/setup/linux.html">Linux Setup</a></p>
+<p><strong>Next:</strong> <a href="../../developing-sbt/developer-notes/nightly-builds.html">Nightly Builds</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -165,9 +252,9 @@ The source code for this page can be found <a href="https://github.com/sbt/websi
 <div class="nav-title">On this page:</div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../../getting-started/setup/macos.html#macos-setup" class="header">macOS Setup</a>
+  <li><a href="../../developing-sbt/developer-notes/command-line-applications.html#creating-command-line-applications-using-sbt" class="header">Creating Command Line Applications Using sbt</a>
   <ul>
-    <li><a href="../../getting-started/setup/macos.html#installing-from-a-third-party-package" class="header">Installing from a third-party package</a></li>
+    <li><a href="../../developing-sbt/developer-notes/command-line-applications.html#hello-world-example" class="header">Hello World Example</a></li>
   </ul></li>
 </ul>
 </div>

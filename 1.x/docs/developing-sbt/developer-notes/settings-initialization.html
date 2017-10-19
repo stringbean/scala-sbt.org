@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>macOS · sbt Reference Manual</title>
+<title>Setting Initialization · sbt Reference Manual</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='website'/>
@@ -131,9 +131,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-breadcrumbs">
 <ul>
   <li><a href="../../index.html">sbt Reference Manual</a></li>
-  <li><a href="../../getting-started/index.html">Getting Started with sbt</a></li>
-  <li><a href="../../getting-started/setup.html">Installing sbt</a></li>
-  <li>macOS Setup</li>
+  <li><a href="../../developing-sbt/index.html">Developing sbt</a></li>
+  <li><a href="../../developing-sbt/developer-notes/index.html">Developer Notes</a></li>
+  <li>Setting Initialization</li>
 </ul>
 </div>
 </div>
@@ -141,22 +141,107 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h2><a href="#macos-setup" name="macos-setup" class="anchor"><span class="anchor-link"></span></a>macOS Setup</h2>
-<p>Download <a href="$sbt_native_package_base$$app_version$/sbt-$app_version$.zip">ZIP</a> or <a href="$sbt_native_package_base$$app_version$/sbt-$app_version$.tgz">TGZ</a> package, and expand it.</p>
-<h3><a href="#installing-from-a-third-party-package" name="installing-from-a-third-party-package" class="anchor"><span class="anchor-link"></span></a>Installing from a third-party package</h3><div class="callout note "><div class="callout-title">Note</div>
-<p>Third-party packages may not provide the latest version. Please make sure to report any issues with these packages to the relevant maintainers.</p></div>
-<h4><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="https://brew.sh">Homebrew</a></h4>
-<pre class="prettyprint"><code class="language-shell">$ brew install sbt@1
+<h2><a href="#setting-initialization" name="setting-initialization" class="anchor"><span class="anchor-link"></span></a>Setting Initialization</h2>
+<p>This page outlines the mechanisms by which sbt loads settings for a particular build, including the hooks where users can control the ordering of everything.</p>
+<p>As stated elsewhere, sbt constructs its initialization graph and task graph via <code>Setting[_]</code> objects. A setting is something which can take the values stored at other <code>Keys</code> in the build state, and generates a new value for a particular build key. sbt converts all registered <code>Setting[_]</code> objects into a giant linear sequence and <em>compiles</em> them into a task graph. This task graph is then used to execute your build.</p>
+<p>All of sbt&rsquo;s loading semantics are contained within the <a href="../sxr/sbt/Load.scala.html">Load.scala</a> file. It is approximately the following:</p>
+<p><img src="/1.x/docs/files/settings-initialization-load-ordering.png" alt="image" /></p>
+<p>The blue circles represent actions happening when sbt loads a project. We can see that sbt performs the following actions in load:</p>
+<ol>
+  <li>Compile the user-level project (<code>~/.sbt/&lt;version&gt;/</code>)
+    <ol>
+      <li>Load any plugins defined by this project (<code>~/.sbt/&lt;version&gt;/plugins/*.sbt</code> and  <code>~/.sbt/&lt;version&gt;/plugins/project/*.scala</code>)</li>
+      <li>Load all settings defined (<code>~/.sbt/&lt;version&gt;/*.sbt</code> and <code>~/.sbt/&lt;version&gt;/plugins/*.scala</code>)</li>
+    </ol>
+  </li>
+  <li>Compile the current project (<code>&lt;working-directory/project</code>)
+    <ol>
+      <li>Load all defined plugins (<code>project/plugins.sbt</code> and <code>project/project/*.scala</code>)</li>
+      <li>Load/Compile the project (<code>project/*.scala</code>)</li>
+    </ol>
+  </li>
+  <li>Load project <code>*.sbt</code> files (<code>build.sbt</code> and friends).</li>
+</ol>
+<p>Each of these loads defines several sequences of settings. The diagram shows the two most important:</p>
+<ul>
+  <li>
+    <p><code>buildSettings</code> - These are settings defined to be <code>in ThisBuild</code> or directly against the <code>Build</code> object. They are  initialized <em>once</em> for the build. You can add these, e.g. in <code>project/build.scala</code>:</p>
+    <pre class="prettyprint"><code class="language-scala">object MyBuild extends Build {
+  override val settings = Seq(foo := &quot;hi&quot;)
+}
 </code></pre>
-<h4><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="https://macports.org/">Macports</a></h4>
-<pre class="prettyprint"><code class="language-shell">$ port install sbt
+    <p>or in a <code>build.sbt</code> file:</p>
+    <pre class="prettyprint"><code class="language-scala">foo in ThisBuild := &quot;hi&quot;
 </code></pre>
+  </li>
+  <li>
+    <p><code>projectSettings</code> - These are settings specific to a project. They are specific to a <em>particular subproject</em> in the  build. A plugin may be contributing its settings to more than on project, in which case the values are duplicated for  each project. You add project specific settings, eg. in <code>project/build.scala</code>:</p>
+    <pre class="prettyprint"><code class="language-scala">object MyBuild extends Build {
+  val test = project.in(file(&quot;.&quot;)).settings(...)
+}
+</code></pre>
+  </li>
+</ul>
+<p>After loading/compiling all the build definitions, sbt has a series of <code>Seq[Setting[_]]</code> that it must order. As shown in the diagram, the default inclusion order for sbt is:</p>
+<ol>
+  <li>All AutoPlugin settings</li>
+  <li>All settings defined in <code>project/Build.scala</code></li>
+  <li>All settings defined in the user directory (<code>~/.sbt/&lt;version&gt;/*.sbt</code>)</li>
+  <li>All local configurations (<code>build.sbt</code>)</li>
+</ol>
+<h3><a href="#controlling-initialization" name="controlling-initialization" class="anchor"><span class="anchor-link"></span></a>Controlling Initialization</h3>
+<p>The order which sbt uses to load settings is configurable at a <em>project</em> level. This means that we can&rsquo;t control the order of settings added to Build/Global namespace, but we can control how each project loads, e.g. plugins and <code>.sbt</code> files. To do so, use the <code>AddSettings</code> class:</p>
+<pre class="prettyprint"><code class="language-scala">import sbt._
+import Keys._
+
+import AddSettings._
+
+object MyOwnOrder extends Build {
+  // here we load config from a txt file.
+  lazy val root = project.in(file(&quot;.&quot;)).settingSets( autoPlugins, buildScalaFiles, sbtFiles(file(&quot;silly.txt&quot;)) )
+}
+</code></pre>
+<p>In the above project, we&rsquo;ve modified the order of settings to be:</p>
+<ol>
+  <li>All AutoPlugin settings.</li>
+  <li>All settings defined in the <code>project/Build.scala</code> file (shown above).</li>
+  <li>All settings found in the <code>silly.txt</code> file.</li>
+</ol>
+<p>What we&rsquo;ve excluded:</p>
+<ul>
+  <li>All settings from the user directory (<code>~/.sbt/&lt;version&gt;</code>)</li>
+  <li>All <code>*.sbt</code> settings.</li>
+</ul>
+<p>The <code>AddSettings</code> object provides the following &ldquo;groups&rdquo; of settings you can use for ordering:</p>
+<ul>
+  <li><code>autoPlugins</code> All the ordered settings of plugins after they&rsquo;ve gone through dependency resolution</li>
+  <li><code>buildScalaFiles</code> The full sequence of settings defined directly in <code>project/*.scala</code> builds.</li>
+  <li><code>sbtFiles(*)</code> Specifies the exact setting DSL files to include (files must use the <code>.sbt</code> file format)</li>
+  <li><code>userSettings</code> All the settings defined in the user directory <code>~/.sbt/&lt;version&gt;/</code>.</li>
+  <li><code>defaultSbtFiles</code> Include all local <code>*.sbt</code> file settings.</li>
+</ul><div class="callout note "><div class="callout-title">Note</div>
+<p>Be very careful when reordering settings. It&rsquo;s easy to accidentally remove core functionality.</p></div>
+<p>For example, let&rsquo;s see what happens if we move the <code>build.sbt</code> files <em>before</em> the <code>buildScalaFile</code>.</p>
+<p>Let&rsquo;s create an example project the following definition. <code>project/build.scala</code>:</p>
+<pre class="prettyprint"><code class="language-scala">object MyTestBuild extends Build {
+  val testProject = project.in(file(&quot;.&quot;)).settingSets(autoPlugins, defaultSbtFiles, buildScalaFile).settings(
+    version := scalaBinaryVersion.value match {
+      case &quot;2.10&quot; =&gt; &quot;1.0-SNAPSHOT&quot;
+      case v =&gt; &quot;1.0-for-\${v}-SNAPSHOT&quot;
+    }
+  )
+}
+</code></pre>
+<p>This build defines a version string which appends the Scala version if the current Scala version is not the in the <code>2.10.x</code> series. Now, when issuing a release we want to lock down the version. Most tools assume this can happen by writing a <code>version.sbt</code> file. <code>version.sbt</code>:</p>
+<pre class="prettyprint"><code class="language-scala">version := &quot;1.0.0&quot;
+</code></pre>
+<p>However, when we load this new build, we find that the <code>version</code> in <code>version.sbt</code> has been <strong>overridden</strong> by the one defined in <code>project/Build.scala</code> because of the order we defined for settings, so the new <code>version.sbt</code> file has no effect.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/getting-started/setup/macos.md">here</a>.
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/developing-sbt/developer-notes/settings-initialization.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../../getting-started/setup/linux.html">Linux Setup</a></p>
+<p><strong>Next:</strong> <a href="../../developing-sbt/developer-notes/build-loaders.html">Build Loaders</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -165,9 +250,9 @@ The source code for this page can be found <a href="https://github.com/sbt/websi
 <div class="nav-title">On this page:</div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../../getting-started/setup/macos.html#macos-setup" class="header">macOS Setup</a>
+  <li><a href="../../developing-sbt/developer-notes/settings-initialization.html#setting-initialization" class="header">Setting Initialization</a>
   <ul>
-    <li><a href="../../getting-started/setup/macos.html#installing-from-a-third-party-package" class="header">Installing from a third-party package</a></li>
+    <li><a href="../../developing-sbt/developer-notes/settings-initialization.html#controlling-initialization" class="header">Controlling Initialization</a></li>
   </ul></li>
 </ul>
 </div>

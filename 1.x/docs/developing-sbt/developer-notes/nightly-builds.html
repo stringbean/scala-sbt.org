@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>macOS · sbt Reference Manual</title>
+<title>Nightly Builds · sbt Reference Manual</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='website'/>
@@ -131,9 +131,9 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-breadcrumbs">
 <ul>
   <li><a href="../../index.html">sbt Reference Manual</a></li>
-  <li><a href="../../getting-started/index.html">Getting Started with sbt</a></li>
-  <li><a href="../../getting-started/setup.html">Installing sbt</a></li>
-  <li>macOS Setup</li>
+  <li><a href="../../developing-sbt/index.html">Developing sbt</a></li>
+  <li><a href="../../developing-sbt/developer-notes/index.html">Developer Notes</a></li>
+  <li>Nightly Builds</li>
 </ul>
 </div>
 </div>
@@ -141,38 +141,25 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h2><a href="#macos-setup" name="macos-setup" class="anchor"><span class="anchor-link"></span></a>macOS Setup</h2>
-<p>Download <a href="$sbt_native_package_base$$app_version$/sbt-$app_version$.zip">ZIP</a> or <a href="$sbt_native_package_base$$app_version$/sbt-$app_version$.tgz">TGZ</a> package, and expand it.</p>
-<h3><a href="#installing-from-a-third-party-package" name="installing-from-a-third-party-package" class="anchor"><span class="anchor-link"></span></a>Installing from a third-party package</h3><div class="callout note "><div class="callout-title">Note</div>
-<p>Third-party packages may not provide the latest version. Please make sure to report any issues with these packages to the relevant maintainers.</p></div>
-<h4><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="https://brew.sh">Homebrew</a></h4>
-<pre class="prettyprint"><code class="language-shell">$ brew install sbt@1
-</code></pre>
-<h4><a href="#" name="" class="anchor"><span class="anchor-link"></span></a><a href="https://macports.org/">Macports</a></h4>
-<pre class="prettyprint"><code class="language-shell">$ port install sbt
-</code></pre>
+<h2><a href="#nightly-builds" name="nightly-builds" class="anchor"><span class="anchor-link"></span></a>Nightly Builds</h2>
+<p>The latest development versions of 1.0.2 are available as nightly builds on <a href="$typesafe_ivy_snapshots$">Typesafe Snapshots</a>.</p>
+<p>To use a nightly build, the instructions are the same for <a href="../../getting-started/setup.html">normal manual setup</a> except:</p>
+<ol>
+  <li>Download the launcher jar from one of the subdirectories of <code>nightly-launcher</code>. They should be listed in  chronological order, so the most recent one will be last.</li>
+  <li>The version number is the name of the subdirectory and is of the form <code>$app_version$.x-yyyyMMdd-HHmmss</code>. Use this in  a build.properties file.</li>
+  <li>Call your script something like <code>sbt-nightly</code> to retain access to a stable sbt launcher. The documentation will refer  to the script as sbt, however.</li>
+</ol>
+<p>Related to the third point, remember that an <code>sbt.version</code> setting in <code>&lt;build-base&gt;/project/build.properties</code> determines the version of sbt to use in a project. If it is not present, the default version associated with the launcher is used. This means that you must set <code>sbt.version=yyyyMMdd-HHmmss</code> in an existing <code>&lt;build-base&gt;/project/build.properties</code>. You can verify the right version of sbt is being used to build a project by running <code>about</code>.</p>
+<p>To reduce problems, it is recommended to not use a launcher jar for one nightly version to launch a different nightly version of sbt.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/getting-started/setup/macos.md">here</a>.
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/developing-sbt/developer-notes/nightly-builds.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../../getting-started/setup/linux.html">Linux Setup</a></p>
+<p><strong>Next:</strong> <a href="../../faq.html">FAQ</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
-<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
-<div class="page-nav">
-<div class="nav-title">On this page:</div>
-<div class="nav-toc">
-<ul>
-  <li><a href="../../getting-started/setup/macos.html#macos-setup" class="header">macOS Setup</a>
-  <ul>
-    <li><a href="../../getting-started/setup/macos.html#installing-from-a-third-party-package" class="header">Installing from a third-party package</a></li>
-  </ul></li>
-</ul>
-</div>
-</div>
-</nav>
 </div>
 </div>
 

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title> · sbt Reference Manual</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='website'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/page.js"></script>
+<script type="text/javascript" src="../js/groups.js"></script>
+<link rel="stylesheet" type="text/css" href="../lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="../css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="../images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="active page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="../index.html">sbt Reference Manual</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="active page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="../index.html">sbt Reference Manual</a></li>
+  <li><a href="../developing-sbt/index.html">Developing sbt</a></li>
+  <li>Coding Guidelines</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h2><a href="#sbt-coding-guidelines" name="sbt-coding-guidelines" class="anchor"><span class="anchor-link"></span></a>sbt Coding Guidelines</h2>
+<p>This page discusses the coding style and other guidelines for sbt 1.0.</p>
+<h3><a href="#general-goals" name="general-goals" class="anchor"><span class="anchor-link"></span></a>General goals</h3>
+<p>sbt 1.0 will primarily target Scala 2.12 with cross-building against Scala 2.10.</p>
+<h4><a href="#aim-for-zero-warnings-except-deprecation-" name="aim-for-zero-warnings-except-deprecation-" class="anchor"><span class="anchor-link"></span></a>Aim for zero warnings (except deprecation)</h4>
+<p>On Scala 2.12 we should aim for zero warnings. One exception may be deprecations if required for cross-building.</p>
+<h3><a href="#modular-design" name="modular-design" class="anchor"><span class="anchor-link"></span></a>Modular design</h3>
+<h4><a href="#aim-small" name="aim-small" class="anchor"><span class="anchor-link"></span></a>Aim small</h4>
+<p>The fewer methods we can expose to the build user, the easier sbt becomes to maintain.</p>
+<h4><a href="#public-apis-should-be-coded-against-" name="public-apis-should-be-coded-against-" class="anchor"><span class="anchor-link"></span></a>Public APIs should be coded against &ldquo;interfaces&rdquo;</h4>
+<p>Code against interfaces.</p>
+<h4><a href="#hide-implementation-details" name="hide-implementation-details" class="anchor"><span class="anchor-link"></span></a>Hide implementation details</h4>
+<p>The implementation details should be hidden behind <code>sbt.internal.x</code> packages, where <code>x</code> could be the name of the main package (like <code>io</code>).</p>
+<h4><a href="#less-interdependence" name="less-interdependence" class="anchor"><span class="anchor-link"></span></a>Less interdependence</h4>
+<p>Independent modules with fewer dependent libraries are easier to reuse.</p>
+<h4><a href="#hide-external-classes" name="hide-external-classes" class="anchor"><span class="anchor-link"></span></a>Hide external classes</h4>
+<p>Avoid exposing external classes in the API, except for standard Scala and Java classes.</p>
+<h4><a href="#hide-internal-modules" name="hide-internal-modules" class="anchor"><span class="anchor-link"></span></a>Hide internal modules</h4>
+<p>A module may be declared internal if it has no use to the public.</p>
+<h4><a href="#compiler-flags" name="compiler-flags" class="anchor"><span class="anchor-link"></span></a>Compiler flags</h4>
+<ul>
+  <li><code>-encoding utf8</code></li>
+  <li><code>-deprecation</code></li>
+  <li><code>-feature</code></li>
+  <li><code>-unchecked</code></li>
+  <li><code>-Xlint</code></li>
+  <li><code>-language:higherKinds</code></li>
+  <li><code>-language:implicitConversions</code></li>
+  <li><code>-Xfuture</code></li>
+  <li><code>-Yinline-warnings</code></li>
+  <li><code>-Yno-adapted-args</code></li>
+  <li><code>-Ywarn-dead-code</code></li>
+  <li><code>-Ywarn-numeric-widen</code></li>
+  <li><code>-Ywarn-value-discard</code></li>
+  <li><code>-Xfatal-warnings</code></li>
+</ul>
+<p>The <code>-Xfatal-warnings</code> may be removed if there are unavoidable warnings.</p>
+<h4><a href="#package-name-and-organization-name" name="package-name-and-organization-name" class="anchor"><span class="anchor-link"></span></a>Package name and organization name</h4>
+<p>Use the package name appended with the layer name, such as <code>sbt.io</code> for IO layer. The organization name for published artifacts should remain <code>org.scala-sbt</code>.</p>
+<h3><a href="#binary-resiliency" name="binary-resiliency" class="anchor"><span class="anchor-link"></span></a>Binary resiliency</h3>
+<p>A good overview on the topic of binary resiliency is <a href="http://jsuereth.com/scala/2012/04/22/scaladays.html">Josh&rsquo;s 2012 talk</a> on Binary resiliency. The guidelines here apply mostly to publicly exposed APIs.</p>
+<h4><a href="#mima" name="mima" class="anchor"><span class="anchor-link"></span></a>MiMa</h4>
+<p>Use <a href="https://github.com/typesafe/migration-manager">MiMa</a>.</p>
+<h4><a href="#public-traits-should-contain-def-declarations-only" name="public-traits-should-contain-def-declarations-only" class="anchor"><span class="anchor-link"></span></a>Public traits should contain <code>def</code> declarations only</h4>
+<ul>
+  <li><code>val</code> or <code>var</code> in a <code>trait</code> results in code generated at subclass and in the artificial <code>Foo$class.$init$</code>.</li>
+  <li><code>lazy val</code> results in code generated at subclass.</li>
+</ul>
+<h4><a href="#abstract-classes-are-also-useful" name="abstract-classes-are-also-useful" class="anchor"><span class="anchor-link"></span></a>Abstract classes are also useful</h4>
+<p><a href="http://www.artima.com/pins1ed/traits.html#12.7">To trait, or not to trait?</a></p>
+<p>Abstract classes are less flexible than traits, but traits pose more problems for binary compatibility. Abstract classes also have better Java interoperability.</p>
+<h4><a href="#seal-traits-and-abstract-classes" name="seal-traits-and-abstract-classes" class="anchor"><span class="anchor-link"></span></a>Seal traits and abstract classes</h4>
+<p>If there&rsquo;s no need to keep a class open, seal it.</p>
+<h4><a href="#finalize-the-leaf-classes" name="finalize-the-leaf-classes" class="anchor"><span class="anchor-link"></span></a>Finalize the leaf classes</h4>
+<p>If there&rsquo;s no need to keep a class open, finalize it.</p>
+<h4><a href="#typeclass-and-subclass-inheritance" name="typeclass-and-subclass-inheritance" class="anchor"><span class="anchor-link"></span></a>Typeclass and subclass inheritance</h4>
+<p>The typeclass pattern with pure traits might ease maintaining binary compatibility more so than subclassing.</p>
+<h4><a href="#avoid-case-classes" name="avoid-case-classes" class="anchor"><span class="anchor-link"></span></a>Avoid case classes</h4>
+<p>Case classes involve code generation that makes it harder to maintain binary compatibility over time. <a href="sbt-datatype.html">sbt-datatype</a> should be used instead.</p>
+<h4><a href="#prefer-method-overloading-over-default-parameter-values" name="prefer-method-overloading-over-default-parameter-values" class="anchor"><span class="anchor-link"></span></a>Prefer method overloading over default parameter values</h4>
+<p>Default parameter values are effectively code generation which makes them difficult to maintain.</p>
+<h3><a href="#other-public-api-matters" name="other-public-api-matters" class="anchor"><span class="anchor-link"></span></a>Other public API matters</h3>
+<p>Here are other guidelines about the sbt public API.</p>
+<h4><a href="#avoid-stringly-typed-programming" name="avoid-stringly-typed-programming" class="anchor"><span class="anchor-link"></span></a>Avoid Stringly-typed programming</h4>
+<p>Define datatypes.</p>
+<h4><a href="#avoid-overuse-of-def-apply" name="avoid-overuse-of-def-apply" class="anchor"><span class="anchor-link"></span></a>Avoid overuse of <code>def apply</code></h4>
+<p><code>def apply</code> should be reserved for factory methods in a companion object that returns type <code>T</code>.</p>
+<h4><a href="#use-specific-datatypes-vector-list-or-array-rather-than-seq" name="use-specific-datatypes-vector-list-or-array-rather-than-seq" class="anchor"><span class="anchor-link"></span></a>Use specific datatypes (<code>Vector</code>, <code>List</code>, or <code>Array</code>), rather than <code>Seq</code></h4>
+<p><code>scala.Seq</code> is <code>scala.collection.Seq</code>, which is not immutable. Default to <code>Vector</code>. Use <code>List</code> if constant prepending is needed. Use <code>Array</code> if Java interoperability is needed.</p><div class="callout note "><div class="callout-title">Note</div>
+<p>Using mutable collections is perfectly fine within the implementation.</p></div>
+<h4><a href="#avoid-calling-toseq-or-anything-with-side-effects-on-set" name="avoid-calling-toseq-or-anything-with-side-effects-on-set" class="anchor"><span class="anchor-link"></span></a>Avoid calling <code>toSeq</code> or anything with side-effects on <code>Set</code></h4>
+<p><code>Set</code> is fine if you stick to set operations, like <code>contains</code> and <code>subsetOf</code>. More often than not, <code>toSeq</code> is called explicitly or implicitly, or some side-effecting method is called from <code>map</code>. This introduces non-determinism to the code.</p>
+<h4><a href="#avoid-calling-toseq-on-map" name="avoid-calling-toseq-on-map" class="anchor"><span class="anchor-link"></span></a>Avoid calling <code>toSeq</code> on <code>Map</code></h4>
+<p>Same as above. This will introduce non-determinism.</p>
+<h4><a href="#avoid-functions-and-tuples-in-the-signature-if-java-interoperability-is-needed" name="avoid-functions-and-tuples-in-the-signature-if-java-interoperability-is-needed" class="anchor"><span class="anchor-link"></span></a>Avoid functions and tuples in the signature, if Java interoperability is needed</h4>
+<p>Instead of functions and tuples, turn them into a trait. This applies where interoperability is a concern, like implementing incremental compilation.</p>
+<h3><a href="#style-matters" name="style-matters" class="anchor"><span class="anchor-link"></span></a>Style matters</h3>
+<h4><a href="#use-scalariform" name="use-scalariform" class="anchor"><span class="anchor-link"></span></a>Use scalariform</h4>
+<p><a href="https://github.com/sbt/sbt-houserules">sbt-houserules</a> comes with scalariform for formatting source code consistently.</p>
+<h4><a href="#avoid-procedure-syntax" name="avoid-procedure-syntax" class="anchor"><span class="anchor-link"></span></a>Avoid procedure syntax</h4>
+<p>Declare an explicit <code>Unit</code> return.</p>
+<h4><a href="#define-instances-of-typeclasses-in-their-companion-objects-when-possible" name="define-instances-of-typeclasses-in-their-companion-objects-when-possible" class="anchor"><span class="anchor-link"></span></a>Define instances of typeclasses in their companion objects, when possible</h4>
+<p>This style is encouraged:</p>
+<pre class="prettyprint"><code class="language-scala">final class FooID
+
+object FooID {
+  implicit val fooIdPicklerUnpicker: PicklerUnpickler[FooID] = ???
+}
+</code></pre>
+<h4><a href="#implicit-conversions-for-syntax-enrich-my-library-pattern-should-be-imported" name="implicit-conversions-for-syntax-enrich-my-library-pattern-should-be-imported" class="anchor"><span class="anchor-link"></span></a>Implicit conversions for syntax (enrich-my-library pattern) should be imported</h4>
+<p>Avoid defining implicit converters in companion objects and package objects.</p>
+<p>Suppose the IO module introduces a <code>URL</code> enrichment called <code>RichURI</code> and LibraryManagement introduces a <code>String</code> enrichment called <code>GroupID</code> (for <code>ModuleID</code> syntax). These implicit conversions should be defined in an object named <code>syntax</code> in the respective package:</p>
+<pre class="prettyprint"><code class="language-scala">package sbt.io
+
+object syntax {
+  implicit def uriToRichURI(uri: URI): RichURI = new RichURI(uri)
+}
+</code></pre>
+<p>When all the layers are available, the <code>sbt</code> package should also define an object called <code>syntax</code> which forwards implicit conversions from all the layers:</p>
+<pre class="prettyprint"><code class="language-scala">package sbt
+
+object syntax {
+  implicit def uriToRichURI(uri: URI): io.RichURI = io.syntax.uriToRichURI(uri)
+  ....
+}
+</code></pre>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/developing-sbt/coding-guidelines.md">here</a>.
+</div>
+
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="../developing-sbt/sbt-datatype.html">sbt-datatype</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../developing-sbt/coding-guidelines.html#sbt-coding-guidelines" class="header">sbt Coding Guidelines</a>
+  <ul>
+    <li><a href="../developing-sbt/coding-guidelines.html#general-goals" class="header">General goals</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html#modular-design" class="header">Modular design</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html#binary-resiliency" class="header">Binary resiliency</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html#other-public-api-matters" class="header">Other public API matters</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html#style-matters" class="header">Style matters</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2017</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="../lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="../js/magellan.js"></script>
+
+<style type="text/css">@import "../lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="../lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>

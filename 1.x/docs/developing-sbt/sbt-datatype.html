@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title>sbt-datatype · sbt Reference Manual</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='website'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/page.js"></script>
+<script type="text/javascript" src="../js/groups.js"></script>
+<link rel="stylesheet" type="text/css" href="../lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="../css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="../images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="active page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="../index.html">sbt Reference Manual</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="active page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="../index.html">sbt Reference Manual</a></li>
+  <li><a href="../developing-sbt/index.html">Developing sbt</a></li>
+  <li>sbt-datatype</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h2><a href="#sbt-datatype" name="sbt-datatype" class="anchor"><span class="anchor-link"></span></a>sbt-datatype</h2>
+<p>sbt-datatype is a code generation library and an sbt autoplugin that generates growable datatypes and helps developers avoid breakage of binary compatibility.</p>
+<p>Unlike standard Scala case classes, the datatypes (or pseudo case classes) generated by this library allow the developer to add new fields to the defined datatypes without breaking binary compatibility, while offering (almost) the same functionality as plain case classes. The only difference is that datatype doesn&rsquo;t generate <code>unapply</code> or <code>copy</code> methods, because they would break binary compatibility.</p>
+<p>In addition, sbt-datatype is also able to generate JSON codec for sjson-new, which can work against various JSON backends.</p>
+<p>Our plugin takes as input a datatype schema in the form of a <code>JSON</code> object, whose format is based on the format defined by <a href="http://avro.apache.org">Apache Avro</a>, and generates the corresponding code in Java or Scala along with the boilerplate code that will allow the generated classes to remain binary-compatible with previous versions of the datatype.</p>
+<p>The source code of the library and autoplugin can be found on <a href="https://github.com/sbt/sbt-datatype">GitHub</a>.</p>
+<h3><a href="#using-the-plugin" name="using-the-plugin" class="anchor"><span class="anchor-link"></span></a>Using the plugin</h3>
+<p>To enable the plugin for your build, put the following line in <code>project/datatype.sbt</code>:</p>
+<pre class="prettyprint"><code class="language-scala">addSbtPlugin(&quot;org.scala-sbt&quot; % &quot;sbt-datatype&quot; % &quot;0.2.2&quot;)
+</code></pre>
+<p>Your datatype definitions should be placed by default in <code>src/main/datatype</code> and <code>src/test/datatype</code>. Here&rsquo;s how your build should be configured:</p>
+<pre class="prettyprint"><code class="language-scala">lazy val library = (project in file(&quot;library&quot;))
+  .enablePlugins(DatatypePlugin)
+  .settings(
+    name := &quot;foo library&quot;,
+  )
+</code></pre>
+<h3><a href="#datatype-schema" name="datatype-schema" class="anchor"><span class="anchor-link"></span></a>Datatype schema</h3>
+<p>Datatype is able to generate three kinds of types:</p>
+<ul>
+  <li>Records</li>
+  <li>Interfaces</li>
+  <li>Enums</li>
+</ul>
+<h4><a href="#records" name="records" class="anchor"><span class="anchor-link"></span></a>Records</h4>
+<p>Records are mapped to Java or Scala <code>class</code>es, corresponding to the standard <code>case class</code>es in Scala.</p>
+<pre class="prettyprint"><code class="language-json">{
+  &quot;types&quot;: [
+    {
+      &quot;name&quot;: &quot;Person&quot;,
+      &quot;type&quot;: &quot;record&quot;,
+      &quot;target&quot;: &quot;Scala&quot;,
+      &quot;fields&quot;: [
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;type&quot;: &quot;String&quot;
+        },
+        {
+          &quot;name&quot;: &quot;age&quot;,
+          &quot;type&quot;: &quot;int&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>This schema will produce the following Scala class:</p>
+<pre class="prettyprint"><code class="language-scala">final class Person(
+  val name: String,
+  val age: Int) extends Serializable {
+
+  override def equals(o: Any): Boolean = o match {
+    case x: Person =&gt; (this.name == x.name) &amp;&amp; (this.age == x.age)
+    case _ =&gt; false
+  }
+  override def hashCode: Int = {
+    37 * (37 * (17 + name.##) + age.##)
+  }
+  override def toString: String = {
+    &quot;Person(&quot; + name + &quot;, &quot; + age + &quot;)&quot;
+  }
+  private[this] def copy(name: String = name, age: Int = age): Person = {
+    new Person(name, age)
+  }
+  def withName(name: String): Person = {
+    copy(name = name)
+  }
+  def withAge(age: Int): Person = {
+    copy(age = age)
+  }
+}
+
+object Person {
+  def apply(name: String, age: Int): Person = new Person(name, age)
+}
+</code></pre>
+<p>Or the following Scala code (after changing the <code>target</code> property to <code>&quot;Java&quot;</code>):</p>
+<pre class="prettyprint"><code class="language-java">public final class Person implements java.io.Serializable {
+    private String name;
+    private int age;
+
+    public Person(String _name, int _age) {
+        super();
+        name = _name;
+        age = _age;
+    }
+    public String name() {
+        return this.name;
+    }
+    public int age() {
+        return this.age;
+    }
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (!(obj instanceof Person)) {
+            return false;
+        } else {
+            Person o = (Person)obj;
+            return name().equals(o.name()) &amp;&amp; (age() == o.age());
+        }
+    }
+    public int hashCode() {
+        return 37 * (37 * (17 + name().hashCode()) + (new Integer(age())).hashCode());
+    }
+    public String toString() {
+        return &quot;Person(&quot;  + &quot;name: &quot; + name() + &quot;, &quot; + &quot;age: &quot; + age() + &quot;)&quot;;
+    }
+}
+</code></pre>
+<h4><a href="#interfaces" name="interfaces" class="anchor"><span class="anchor-link"></span></a>Interfaces</h4>
+<p>Interfaces are mapped to Java <code>abstract class</code>es or Scala <code>abstract classes</code>. They can be extended by other interfaces or records.</p>
+<pre class="prettyprint"><code class="language-json">{
+  &quot;types&quot;: [
+    {
+      &quot;name&quot;: &quot;Greeting&quot;,
+      &quot;namespace&quot;: &quot;com.example&quot;,
+      &quot;target&quot;: &quot;Scala&quot;,
+      &quot;type&quot;: &quot;interface&quot;,
+      &quot;fields&quot;: [
+        {
+          &quot;name&quot;: &quot;message&quot;,
+          &quot;type&quot;: &quot;String&quot;
+        }
+      ],
+      &quot;types&quot;: [
+        {
+          &quot;name&quot;: &quot;SimpleGreeting&quot;,
+          &quot;namespace&quot;: &quot;com.example&quot;,
+          &quot;target&quot;: &quot;Scala&quot;,
+          &quot;type&quot;: &quot;record&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>This generates abstract class named <code>Greeting</code> and a class named <code>SimpleGreeting</code> that extends <code>Greeting</code>.</p>
+<p>In addition, interfaces can define <code>messages</code>, which generates abstract method declarations.</p>
+<pre class="prettyprint"><code class="language-json">{
+  &quot;types&quot;: [
+    {
+      &quot;name&quot;: &quot;FooService&quot;,
+      &quot;target&quot;: &quot;Scala&quot;,
+      &quot;type&quot;: &quot;interface&quot;,
+      &quot;messages&quot;: [
+        {
+          &quot;name&quot;: &quot;doSomething&quot;,
+          &quot;response&quot;: &quot;int*&quot;,
+          &quot;request&quot;: [
+            {
+              &quot;name&quot;: &quot;arg0&quot;,
+              &quot;type&quot;: &quot;int*&quot;,
+              &quot;doc&quot;: [
+                &quot;The first argument of the message.&quot;,
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<h4><a href="#enums" name="enums" class="anchor"><span class="anchor-link"></span></a>Enums</h4>
+<p>Enums are mapped to Java enumerations or Scala case objects.</p>
+<pre class="prettyprint"><code class="language-json">{
+  &quot;types&quot;: [
+    {
+      &quot;name&quot;: &quot;Weekdays&quot;,
+      &quot;type&quot;: &quot;enum&quot;,
+      &quot;target&quot;: &quot;Java&quot;,
+      &quot;symbols&quot;: [
+        &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;,
+        &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>This schema will generate the following Java code:</p>
+<pre class="prettyprint"><code class="language-java">public enum Weekdays {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}
+</code></pre>
+<p>Or the following Scala code (after changing the <code>target</code> property to):</p>
+<pre class="prettyprint"><code class="language-scala">sealed abstract class Weekdays extends Serializable
+object Weekdays {
+  case object Monday extends Weekdays
+  case object Tuesday extends Weekdays
+  case object Wednesday extends Weekdays
+  case object Thursday extends Weekdays
+  case object Friday extends Weekdays
+  case object Saturday extends Weekdays
+  case object Sunday extends Weekdays
+}
+</code></pre>
+<h3><a href="#using-datatype-to-retain-binary-compatibility" name="using-datatype-to-retain-binary-compatibility" class="anchor"><span class="anchor-link"></span></a>Using datatype to retain binary compatibility</h3>
+<p>By using the <code>since</code> and <code>default</code> parameters, it is possible to grow existing datatypes while remaining binary compatible with classes that have been compiled against an earlier version of your datatype definition.</p>
+<p>Consider the following initial version of a datatype:</p>
+<pre class="prettyprint"><code class="language-json">{
+  &quot;types&quot;: [
+    {
+      &quot;name&quot;: &quot;Greeting&quot;,
+      &quot;type&quot;: &quot;record&quot;,
+      &quot;target&quot;: &quot;Scala&quot;,
+      &quot;fields&quot;: [
+        {
+          &quot;name&quot;: &quot;message&quot;,
+          &quot;type&quot;: &quot;String&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>The generated code could be used in a Scala program using the following code:</p>
+<pre class="prettyprint"><code class="language-scala">val greeting = Greeting(&quot;hello&quot;)
+</code></pre>
+<p>Imagine now that you would like to extend your datatype to include a date to the <code>Greeting</code>s. The datatype can be modified accordingly:</p>
+<pre class="prettyprint"><code class="language-json">{
+  &quot;types&quot;: [
+    {
+      &quot;name&quot;: &quot;Greeting&quot;,
+      &quot;type&quot;: &quot;record&quot;,
+      &quot;target&quot;: &quot;Scala&quot;,
+      &quot;fields&quot;: [
+        {
+          &quot;name&quot;: &quot;message&quot;,
+          &quot;type&quot;: &quot;String&quot;
+        },
+        {
+          &quot;name&quot;: &quot;date&quot;,
+          &quot;type&quot;: &quot;java.util.Date&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>Unfortunately, the code that used <code>Greeting</code> would no longer compile, and classes that have been compiled against the previous version of the datatype would crash with a <code>NoSuchMethodError</code>.</p>
+<p>To circumvent this problem and allow you to grow your datatypes, it is possible to indicate the version <code>since</code> the field exists and a <code>default</code> value in the datatype definition:</p>
+<pre class="prettyprint"><code class="language-json">{
+  &quot;types&quot;: [
+    {
+      &quot;name&quot;: &quot;Greeting&quot;,
+      &quot;type&quot;: &quot;record&quot;,
+      &quot;target&quot;: &quot;Scala&quot;,
+      &quot;fields&quot;: [
+        {
+          &quot;name&quot;: &quot;message&quot;,
+          &quot;type&quot;: &quot;String&quot;
+        },
+        {
+          &quot;name&quot;: &quot;date&quot;,
+          &quot;type&quot;: &quot;java.util.Date&quot;,
+          &quot;since&quot;: &quot;0.2.0&quot;,
+          &quot;default&quot;: &quot;new java.util.Date()&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>Now the code that was compiled against previous definitions of the datatype will still run.</p>
+<h3><a href="#json-codec-generation" name="json-codec-generation" class="anchor"><span class="anchor-link"></span></a>JSON codec generation</h3>
+<p>Adding <code>JsonCodecPlugin</code> to the subproject will generate sjson-new JSON codes for the datatypes.</p>
+<pre class="prettyprint"><code class="language-scala">lazy val root = (project in file(&quot;.&quot;))
+  .enablePlugins(DatatypePlugin, JsonCodecPlugin)
+  .settings(
+    scalaVersion := &quot;2.11.8&quot;,
+    libraryDependencies += &quot;com.eed3si9n&quot; %% &quot;sjson-new-scalajson&quot; % &quot;0.4.1&quot;
+  )
+</code></pre>
+<p><code>codecNamespace</code> can be used to specify the package name for the codecs.</p>
+<pre class="prettyprint"><code class="language-json">{
+  &quot;codecNamespace&quot;: &quot;com.example.codec&quot;,
+  &quot;fullCodec&quot;: &quot;CustomJsonProtocol&quot;,
+  &quot;types&quot;: [
+    {
+      &quot;name&quot;: &quot;Person&quot;,
+      &quot;namespace&quot;: &quot;com.example&quot;,
+      &quot;type&quot;: &quot;record&quot;,
+      &quot;target&quot;: &quot;Scala&quot;,
+      &quot;fields&quot;: [
+        {
+          &quot;name&quot;: &quot;name&quot;,
+          &quot;type&quot;: &quot;String&quot;
+        },
+        {
+          &quot;name&quot;: &quot;age&quot;,
+          &quot;type&quot;: &quot;int&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>JsonFormat traits will be generated under <code>com.example.codec</code> package, along with a full codec named <code>CustomJsonProtocol</code> that mixes in all the traits.</p>
+<pre><code>scala&gt; import sjsonnew.support.scalajson.unsafe.{ Converter, CompactPrinter, Parser }
+import sjsonnew.support.scalajson.unsafe.{Converter, CompactPrinter, Parser}
+
+scala&gt; import com.example.codec.CustomJsonProtocol._
+import com.example.codec.CustomJsonProtocol._
+
+scala&gt; import com.example.Person
+import com.example.Person
+
+scala&gt; val p = Person(&quot;Bob&quot;, 20)
+p: com.example.Person = Person(Bob, 20)
+
+scala&gt; val j = Converter.toJsonUnsafe(p)
+j: scala.json.ast.unsafe.JValue = JObject([Lscala.json.ast.unsafe.JField;@6731ad72)
+
+scala&gt; val s = CompactPrinter(j)
+s: String = {&quot;name&quot;:&quot;Bob&quot;,&quot;age&quot;:20}
+
+scala&gt; val x = Parser.parseUnsafe(s)
+x: scala.json.ast.unsafe.JValue = JObject([Lscala.json.ast.unsafe.JField;@7331f7f8)
+
+scala&gt; val q = Converter.fromJsonUnsafe[Person](x)
+q: com.example.Person = Person(Bob, 20)
+
+scala&gt; assert(p == q)
+</code></pre>
+<h3><a href="#existing-parameters-for-protocols-records-etc-" name="existing-parameters-for-protocols-records-etc-" class="anchor"><span class="anchor-link"></span></a>Existing parameters for protocols, records, etc.</h3>
+<p>All the elements of the schema definition accept a number of parameters that will influence the generated code. These parameters are not available for every node of the schema. Please refer to the syntax summary to see whether a parameters can be defined for a node.</p>
+<h6><a href="#name" name="name" class="anchor"><span class="anchor-link"></span></a><code>name</code></h6>
+<p>This parameter defines the name of a field, record, field, etc.</p>
+<h6><a href="#target" name="target" class="anchor"><span class="anchor-link"></span></a><code>target</code></h6>
+<p>This parameter determines whether the code will be generated in Java or Scala.</p>
+<h6><a href="#namespace" name="namespace" class="anchor"><span class="anchor-link"></span></a><code>namespace</code></h6>
+<p>This parameter exists only for <code>Definition</code>s. It determines the package in which the code will be generated.</p>
+<h6><a href="#doc" name="doc" class="anchor"><span class="anchor-link"></span></a><code>doc</code></h6>
+<p>The Javadoc that will accompany the generated element.</p>
+<h6><a href="#fields" name="fields" class="anchor"><span class="anchor-link"></span></a><code>fields</code></h6>
+<p>For a <code>protocol</code> or a <code>record</code> only, it describes all the fields that compose the generated entity.</p>
+<h6><a href="#types" name="types" class="anchor"><span class="anchor-link"></span></a><code>types</code></h6>
+<p>For a <code>protocol</code>, it defines the child <code>protocol</code>s and <code>record</code>s that extend it.</p>
+<p>For an <code>enumeration</code>, it defines the values of the enumeration.</p>
+<h6><a href="#since" name="since" class="anchor"><span class="anchor-link"></span></a><code>since</code></h6>
+<p>This parameter exists for <code>field</code>s only. It indicates the version in which the field has been added to its parent <code>protocol</code> or <code>record</code>.</p>
+<p>When this parameter is defined, <code>default</code> must also be defined.</p>
+<h6><a href="#default" name="default" class="anchor"><span class="anchor-link"></span></a><code>default</code></h6>
+<p>This parameter exists for <code>field</code>s only. It indicates what the default value should be for this field, in case it is used by a class that has been compiled against an earlier version of this datatype.</p>
+<p>It must contain an expression which is valid in the <code>target</code> language of the parent <code>protocol</code> or <code>record</code>.</p>
+<h6><a href="#type-for-fields" name="type-for-fields" class="anchor"><span class="anchor-link"></span></a><code>type</code> for <code>field</code>s</h6>
+<p>It indicates what is the underlying type of the field.</p>
+<p>Always use the type that you want to see in Scala. For instance, if your field will contain an integer value, use <code>Int</code> rather than Java&rsquo;s <code>int</code>. <code>datatype</code> will automatically use Java&rsquo;s primitive types if they are available.</p>
+<p>For non-primitive types, it is recommended to write the fully-qualified type.</p>
+<h6><a href="#type-for-other-definitions" name="type-for-other-definitions" class="anchor"><span class="anchor-link"></span></a><code>type</code> for other definitions</h6>
+<p>It simply indicates the kind of entity that you want to generate: <code>protocol</code>, <code>record</code> or <code>enumeration</code>.</p>
+<h3><a href="#settings" name="settings" class="anchor"><span class="anchor-link"></span></a>Settings</h3>
+<p>This location can be changed by setting a new location in your build definition:</p>
+<pre class="prettyprint"><code class="language-scala">datatypeSource in generateDatatypes := file(&quot;some/location&quot;)
+</code></pre>
+<p>The plugin exposes other settings for Scala code generation:</p>
+<ol>
+  <li><code>datatypeScalaFileNames in (Compile, generateDatatypes)</code> This setting accepts a function <code>Definition =&gt; File</code> which  will determine the filename for every generated Scala definition.</li>
+  <li><code>datatypeScalaSealInterfaces in (Compile, generateDatatypes)</code> This setting accepts a boolean value, and will  determine whether interfaces should be <code>seal</code>ed or not.</li>
+</ol>
+<h3><a href="#syntax-summary" name="syntax-summary" class="anchor"><span class="anchor-link"></span></a>Syntax summary</h3>
+<pre><code>Schema           := {   &quot;types&quot;: [ Definition* ]
+                     (, &quot;codecNamespace&quot;: string constant)?
+                     (, &quot;fullCodec&quot;: string constant)? }
+
+Definition       := Record | Interface | Enumeration
+
+Record           := {   &quot;name&quot;: ID,
+                        &quot;type&quot;: &quot;record&quot;,
+                        &quot;target&quot;: (&quot;Scala&quot; | &quot;Java&quot;)
+                     (, &quot;namespace&quot;: string constant)?
+                     (, &quot;doc&quot;: string constant)?
+                     (, &quot;fields&quot;: [ Field* ])? }
+
+Interface        := {   &quot;name&quot;: ID,
+                        &quot;type&quot;: &quot;interface&quot;,
+                        &quot;target&quot;: (&quot;Scala&quot; | &quot;Java&quot;)
+                     (, &quot;namespace&quot;: string constant)?
+                     (, &quot;doc&quot;: string constant)?
+                     (, &quot;fields&quot;: [ Field* ])?
+                     (, &quot;messages&quot;: [ Message* ])?
+                     (, &quot;types&quot;: [ Definition* ])? }
+
+Enumeration      := {   &quot;name&quot;: ID,
+                        &quot;type&quot;: &quot;enum&quot;,
+                        &quot;target&quot;: (&quot;Scala&quot; | &quot;Java&quot;)
+                     (, &quot;namespace&quot;: string constant)?
+                     (, &quot;doc&quot;: string constant)?
+                     (, &quot;symbols&quot;: [ Symbol* ])? }
+
+Symbol           := ID
+                  | {   &quot;name&quot;: ID
+                     (, &quot;doc&quot;: string constant)? }
+
+Field            := {   &quot;name&quot;: ID,
+                        &quot;type&quot;: ID
+                     (, &quot;doc&quot;: string constant)?
+                     (, &quot;since&quot;: version number string)?
+                     (, &quot;default&quot;: string constant)? }
+
+Message          := {   &quot;name&quot;: ID,
+                        &quot;response&quot;: ID
+                     (, &quot;request&quot;: [ Request* ])?
+                     (, &quot;doc&quot;: string constant)? }
+
+Request          := {   &quot;name&quot;: ID,
+                        &quot;type&quot;: ID
+                     (, &quot;doc&quot;: string constant)? }
+</code></pre>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/developing-sbt/sbt-datatype.md">here</a>.
+</div>
+
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="../developing-sbt/compiler-interface/index.html">Compiler Interface</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../developing-sbt/sbt-datatype.html#sbt-datatype" class="header">sbt-datatype</a>
+  <ul>
+    <li><a href="../developing-sbt/sbt-datatype.html#using-the-plugin" class="header">Using the plugin</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html#datatype-schema" class="header">Datatype schema</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html#using-datatype-to-retain-binary-compatibility" class="header">Using datatype to retain binary compatibility</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html#json-codec-generation" class="header">JSON codec generation</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html#existing-parameters-for-protocols-records-etc-" class="header">Existing parameters for protocols, records, etc.</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html#settings" class="header">Settings</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html#syntax-summary" class="header">Syntax summary</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2017</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="../lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="../js/magellan.js"></script>
+
+<style type="text/css">@import "../lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="../lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>

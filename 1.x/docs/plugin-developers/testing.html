@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title>Testing sbt Plugins · sbt Reference Manual</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='website'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/page.js"></script>
+<script type="text/javascript" src="../js/groups.js"></script>
+<link rel="stylesheet" type="text/css" href="../lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="../css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="../images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="active page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="../index.html">sbt Reference Manual</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="active page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="../index.html">sbt Reference Manual</a></li>
+  <li><a href="../plugin-developers/index.html">sbt for Plugin Developers</a></li>
+  <li>Testing sbt Plugins</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h2><a href="#testing-sbt-plugins" name="testing-sbt-plugins" class="anchor"><span class="anchor-link"></span></a>Testing sbt Plugins</h2>
+<p>Let&rsquo;s talk about testing. Once you write a plugin, it turns into a long-term thing. To keep adding new features (or to keep fixing bugs), writing tests makes sense.</p>
+<h3><a href="#introducing-scripted" name="introducing-scripted" class="anchor"><span class="anchor-link"></span></a>Introducing scripted</h3>
+<p>sbt comes with scripted test framework, which lets you script a build scenario. It was written to test sbt itself on complex scenarios &ndash; such as change detection and partial compilation:</p>
+<blockquote>
+  <p>Now, consider what happens if you were to delete B.scala but do not update A.scala. When you recompile, you should get an error because B no longer exists for A to reference.</p>
+  <p>[&hellip; (really complicated stuff)]</p>
+  <p>The scripted test framework is used to verify that sbt handles cases such as that described above.</p>
+</blockquote>
+<p>The framework is made available via <em>scripted-plugin</em>. The rest of this page explains how to include the <em>scripted-plugin</em> into your plugin.</p>
+<h3><a href="#snapshot-builds" name="snapshot-builds" class="anchor"><span class="anchor-link"></span></a>Snapshot builds</h3>
+<p>Before you start, set your version to a <code>-SNAPSHOT</code> one because <em>scripted-plugin</em> will publish your plugin locally. If you don&rsquo;t use <code>-SNAPSHOT</code>, you could get into a horrible inconsistent state of you and the rest of the world seeing different artefacts.</p>
+<h3><a href="#adding-scripted" name="adding-scripted" class="anchor"><span class="anchor-link"></span></a>Adding scripted</h3>
+<p>Add <em>scripted-plugin</em> to your plugin build. <code>project/scripted.sbt</code>:</p>
+<pre class="prettyprint"><code class="language-scala">libraryDependencies += { &quot;org.scala-sbt&quot; %% &quot;scripted-plugin&quot; % sbtVersion.value }
+</code></pre>
+<p>Then add the following settings to <code>scripted.sbt</code>:</p>
+<pre class="prettyprint"><code class="language-scala">scriptedLaunchOpts := { scriptedLaunchOpts.value ++
+  Seq(&quot;-Xmx1024M&quot;, &quot;-Dplugin.version=&quot; + version.value)
+}
+scriptedBufferLog := false
+</code></pre>
+<h3><a href="#creating-a-test-project" name="creating-a-test-project" class="anchor"><span class="anchor-link"></span></a>Creating a test project</h3>
+<p>Make dir structure <code>src/sbt-test/&lt;test-group&gt;/&lt;test-name&gt;</code>. For starters, try something like <code>src/sbt-test/&lt;your-plugin-name&gt;/simple</code>.</p>
+<p>Now ready? Create an initial build in <code>simple</code>. Like a real build using your plugin. I&rsquo;m sure you already have several of them to test manually. Here&rsquo;s an example <code>build.sbt</code>:</p>
+<pre class="prettyprint"><code class="language-scala">lazy val root = (project in file(&quot;.&quot;))
+  .settings(
+    version := &quot;0.1&quot;,
+    scalaVersion := &quot;2.10.6&quot;,
+    assemblyJarName in assembly := &quot;foo.jar&quot;
+  )
+</code></pre>
+<p>In <code>project/plugins.sbt</code>:</p>
+<pre class="prettyprint"><code class="language-scala">sys.props.get(&quot;plugin.version&quot;) match {
+  case Some(x) =&gt; addSbtPlugin(&quot;com.eed3si9n&quot; % &quot;sbt-assembly&quot; % x)
+  case _ =&gt; sys.error(&quot;&quot;&quot;|The system property &#39;plugin.version&#39; is not defined.
+                         |Specify this property using the scriptedLaunchOpts -D.&quot;&quot;&quot;.stripMargin)
+}
+</code></pre>
+<p>This a trick I picked up from <a href="https://github.com/JamesEarlDouglas/xsbt-web-plugin/commit/feabb2eb554940d9b28049bd0618b6a790d9e141">JamesEarlDouglas/xsbt-web-plugin@feabb2</a>, which allows us to pass version number into the test.</p>
+<p>I also have <code>src/main/scala/hello.scala</code>:</p>
+<pre class="prettyprint"><code class="language-scala">object Main extends App {
+  println(&quot;hello&quot;)
+}
+</code></pre>
+<h3><a href="#writing-a-test-script" name="writing-a-test-script" class="anchor"><span class="anchor-link"></span></a>Writing a test script</h3>
+<p>Now, write a script to describe your scenario in a file called <code>test</code> located at the root dir of your test project.</p>
+<pre><code># check if the file gets created
+&gt; assembly
+$ exists target/scala-2.10/foo.jar
+</code></pre>
+<p>Here is the syntax for the script:</p>
+<ul>
+  <li><code>#</code> starts a one-line comment</li>
+  <li><code>&gt; &lt;task&gt;</code> sends a task to sbt (and tests if it succeeds)</li>
+  <li><code>-&gt; &lt;task&gt;</code> sends a task to sbt and expects it to fail</li>
+  <li><code>$ &lt;file-command&gt; &lt;arg&gt;*</code> performs a file command (and tests if it succeeds)</li>
+  <li><code>-$ &lt;file-command&gt; &lt;arg&gt;*</code> performs a file command, but expects it to fail</li>
+</ul>
+<p>File commands are:</p>
+<ul>
+  <li><code>touch &lt;path&gt;+</code>: creates or updates the timestamp on the files.</li>
+  <li><code>delete &lt;path&gt;+</code>: deletes the files.</li>
+  <li><code>exists &lt;path&gt;+</code>: checks if the files exist.</li>
+  <li><code>mkdir &lt;path&gt;+</code>: creates dirs.</li>
+  <li><code>absent &lt;path&gt;+</code>: checks if the files don&rsquo;t exist.</li>
+  <li><code>newer &lt;source&gt; &lt;target&gt;</code>: checks if <code>source</code> is newer.</li>
+  <li><code>must-mirror &lt;source&gt; &lt;target&gt;</code>: checks if <code>source</code> is identical.</li>
+  <li><code>pause</code>: pauses until enter is pressed.</li>
+  <li><code>sleep &lt;time&gt;</code>: sleeps for <code>time</code> milliseconds.</li>
+  <li><code>exec &lt;command&gt; &lt;arg&gt;*</code>: runs the command in another process.</li>
+  <li><code>copy-file &lt;fromPath&gt; &lt;toPath&gt;</code>: copies the file.</li>
+  <li><code>copy &lt;fromPath&gt;+ &lt;toDir&gt;</code>: copies the paths to <code>toDir</code> preserving relative structure.</li>
+  <li><code>copy-flat &lt;fromPath&gt;+ &lt;toDir&gt;</code>: copies the paths to <code>toDir</code> flat.</li>
+</ul>
+<p>So my script will run the <code>assembly</code> task and checks to see if <code>foo.jar</code> was created. We&rsquo;ll cover more complex tests later.</p>
+<h3><a href="#running-the-tests" name="running-the-tests" class="anchor"><span class="anchor-link"></span></a>Running the tests</h3>
+<p>To run the scripts, go back to your plugin project, and run:</p>
+<pre><code>&gt; scripted
+</code></pre>
+<p>This will copy your test build into a temporary dir, and executes the <code>test</code> script. If everything works out, you&rsquo;ll see <code>publishLocal</code> running, then:</p>
+<pre><code>Running sbt-assembly / simple
+[success] Total time: 18 s, completed Sep 17, 2011 3:00:58 AM
+</code></pre>
+<h3><a href="#custom-assertions" name="custom-assertions" class="anchor"><span class="anchor-link"></span></a>Custom assertions</h3>
+<p>The file commands are great, but not nearly enough because none of them test the actual contents. An easy way to test the contents is to implement a custom task in your test build.</p>
+<p>For my hello project, I&rsquo;d like to check if the resulting jar prints out &ldquo;hello&rdquo;. I can take advantage of <code>scala.sys.process.Process</code> to run the jar. To express a failure, just throw an error. Here&rsquo;s <code>build.sbt</code>:</p>
+<pre class="prettyprint"><code class="language-scala">import scala.sys.process.Process
+
+lazy val root = (project in file(&quot;.&quot;))
+  .settings(
+    version := &quot;0.1&quot;,
+    scalaVersion := &quot;2.10.6&quot;,
+    assemblyJarName in assembly := &quot;foo.jar&quot;,
+    TaskKey[Unit](&quot;check&quot;) := {
+      val process = Process(&quot;java&quot;, Seq(&quot;-jar&quot;, (crossTarget.value / &quot;foo.jar&quot;).toString))
+      val out = (process!!)
+      if (out.trim != &quot;bye&quot;) sys.error(&quot;unexpected output: &quot; + out)
+      ()
+    }
+  )
+</code></pre>
+<p>I am intentionally testing if it matches &ldquo;bye&rdquo;, to see how the test fails.</p>
+<p>Here&rsquo;s <code>test</code>:</p>
+<pre><code># check if the file gets created
+&gt; assembly
+$ exists target/foo.jar
+
+# check if it says hello
+&gt; check
+</code></pre>
+<p>Running <code>scripted</code> fails the test as expected:</p>
+<pre><code>[info] [error] {file:/private/var/folders/Ab/AbC1EFghIj4LMNOPqrStUV+++XX/-Tmp-/sbt_cdd1b3c4/simple/}default-0314bd/*:check: unexpected output: hello
+[info] [error] Total time: 0 s, completed Sep 21, 2011 8:43:03 PM
+[error] x sbt-assembly / simple
+[error]    {line 6}  Command failed: check failed
+[error] {file:/Users/foo/work/sbt-assembly/}default-373f46/*:scripted: sbt-assembly / simple failed
+[error] Total time: 14 s, completed Sep 21, 2011 8:00:00 PM
+</code></pre>
+<h3><a href="#finishing-up" name="finishing-up" class="anchor"><span class="anchor-link"></span></a>Finishing up</h3>
+<p>Until you get the hang of it, it might take a while for the test itself to behave correctly. There are several techniques that may come in handy.</p>
+<p>First place to start is turning off the log buffering:</p>
+<pre><code>&gt; set scriptedBufferLog := false
+</code></pre>
+<p>This for example should print out the location of the temporary dir:</p>
+<pre><code>[info] [info] Set current project to default-c6500b (in build file:/private/var/folders/Ab/AbC1EFghIj4LMNOPqrStUV+++XX/-Tmp-/sbt_8d950687/simple/project/plugins/)
+...
+</code></pre>
+<p>Add the following line to your <code>test</code> script to suspend the test until you hit the enter key:</p>
+<pre><code>$ pause
+</code></pre>
+<p>If you&rsquo;re thinking about going down to the <code>sbt/sbt-test/sbt-foo/simple</code> and running <code>sbt</code> - don&rsquo;t do it. The right way is to copy the dir somewhere else and run it.</p>
+<h2><a href="#examples-of-scripted-tests" name="examples-of-scripted-tests" class="anchor"><span class="anchor-link"></span></a>Examples of scripted tests</h2>
+<p>There are literally <a href="https://github.com/sbt/sbt/tree/0.13/sbt/src/sbt-test">100+ scripted tests</a> under sbt project itself. Browse around to get inspirations.</p>
+<p>For example, here&rsquo;s the one called by-name.</p>
+<pre><code>&gt; compile
+
+# change =&gt; Int to Function0
+$ copy-file changes/A.scala A.scala
+
+# Both A.scala and B.scala need to be recompiled because the type has changed
+-&gt; compile
+</code></pre>
+<p><a href="https://github.com/JamesEarlDouglas/xsbt-web-plugin/tree/master/src/sbt-test">xsbt-web-plugin</a> and <a href="https://github.com/sbt/sbt-assembly/tree/master/src/sbt-test/sbt-assembly">sbt-assembly</a> also have some great scripted tests too.</p>
+<p>That&rsquo;s it! Let me know about your experience in testing plugins!</p>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/plugin-developers/testing.md">here</a>.
+</div>
+
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="../plugin-developers/best-practices.html">Best Practices</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../plugin-developers/testing.html#testing-sbt-plugins" class="header">Testing sbt Plugins</a>
+  <ul>
+    <li><a href="../plugin-developers/testing.html#introducing-scripted" class="header">Introducing scripted</a></li>
+    <li><a href="../plugin-developers/testing.html#snapshot-builds" class="header">Snapshot builds</a></li>
+    <li><a href="../plugin-developers/testing.html#adding-scripted" class="header">Adding scripted</a></li>
+    <li><a href="../plugin-developers/testing.html#creating-a-test-project" class="header">Creating a test project</a></li>
+    <li><a href="../plugin-developers/testing.html#writing-a-test-script" class="header">Writing a test script</a></li>
+    <li><a href="../plugin-developers/testing.html#running-the-tests" class="header">Running the tests</a></li>
+    <li><a href="../plugin-developers/testing.html#custom-assertions" class="header">Custom assertions</a></li>
+    <li><a href="../plugin-developers/testing.html#finishing-up" class="header">Finishing up</a></li>
+    <li><a href="../plugin-developers/testing.html#examples-of-scripted-tests" class="header">Examples of scripted tests</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2017</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="../lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="../js/magellan.js"></script>
+
+<style type="text/css">@import "../lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="../lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="../lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>

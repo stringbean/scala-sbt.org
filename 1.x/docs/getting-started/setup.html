@@ -30,7 +30,7 @@
 <span class="home-icon">⌂</span>sbt Reference Manual
 </a>
 <div class="version-number">
-0.1*
+1.0.2
 </div>
 </div>
 <div class="nav-toc">
@@ -41,6 +41,23 @@
     <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
     <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
   </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
 </ul>
 </div>
 
@@ -72,7 +89,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <span class="home-icon">⌂</span>sbt Reference Manual
 </a>
 <div class="version-number">
-0.1*
+1.0.2
 </div>
 </div>
 <div class="nav-toc">
@@ -83,6 +100,23 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
     <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
     <li><a href="../getting-started/running.html" class="page">Running sbt</a></li>
   </ul></li>
+  <li><a href="../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../faq.html" class="page">FAQ</a></li>
 </ul>
 </div>
 
@@ -110,16 +144,16 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <p>To create an sbt project, you&rsquo;ll need to take these steps:</p>
 <ul>
   <li>Install sbt.</li>
-  <li>Setup a simple <a href="Hello.html">hello world</a> project
+  <li>Setup a simple <a href="hello-world.html">hello world</a> project
     <ul>
       <li>Create a project directory with source files in it.</li>
       <li>Create your build definition.</li>
     </ul>
   </li>
-  <li>Move on to <a href="Running.html">running</a> to learn how to run sbt.</li>
+  <li>Move on to <a href="running.html">running</a> to learn how to run sbt.</li>
   <li>Then move on to <a href="Basic-Def.html">.sbt build definition</a> to learn more about build definitions.</li>
 </ul>
-<p>Ultimately, the installation of sbt boils down to a launcher JAR and a shell script, but depending on your platform, we provide several ways to make the process less tedious. Head over to the installation steps for <a href="Installing-sbt-on-Mac.html">Mac</a>, <a href="Installing-sbt-on-Windows.html">Windows</a>, or <a href="Installing-sbt-on-Linux.html">Linux</a>.</p>
+<p>Ultimately, the installation of sbt boils down to a launcher JAR and a shell script, but depending on your platform, we provide several ways to make the process less tedious. Head over to the installation steps for <a href="setup/macos.html">Mac</a>, <a href="setup/windows.html">Windows</a>, or <a href="setup/linux.html">Linux</a>.</p>
 <h3><a href="#tips-and-notes" name="tips-and-notes" class="anchor"><span class="anchor-link"></span></a>Tips and Notes</h3>
 <p>If you have any trouble running sbt, see <a href="../docs/Setup-Notes.html">Setup Notes</a> on terminal encodings, HTTP proxies, and JVM options.</p>
 <div class="source-github">

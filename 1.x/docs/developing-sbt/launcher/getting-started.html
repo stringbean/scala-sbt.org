@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title> · sbt Reference Manual</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='website'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/page.js"></script>
+<script type="text/javascript" src="../../js/groups.js"></script>
+<link rel="stylesheet" type="text/css" href="../../lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../../lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="../../images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="../../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="../../index.html">sbt Reference Manual</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="../../index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="../../getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="../../getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="../../getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="../../plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="../../plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="../../plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="../../plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="../../plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="../../developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="../../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="../../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="../../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="../../developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="../../developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="../../faq.html" class="page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="../../index.html">sbt Reference Manual</a></li>
+  <li><a href="../../developing-sbt/index.html">Developing sbt</a></li>
+  <li><a href="../../developing-sbt/launcher/index.html">sbt Launcher</a></li>
+  <li>Getting Started</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h2><a href="#getting-started-with-the-sbt-launcher" name="getting-started-with-the-sbt-launcher" class="anchor"><span class="anchor-link"></span></a>Getting Started with the sbt launcher</h2>
+<p>The sbt launcher provides two parts:</p>
+<ol>
+  <li>An interface for launched applications to interact with the launcher code.</li>
+  <li>A minimal sbt-launch.jar that can launch applications by resolving them through ivy.</li>
+</ol>
+<p>The sbt launcher component is a self-contained jar that boots a Scala application or server without Scala or the application already existing on the system. The only prerequisites are the launcher jar itself, an optional configuration file, and a Java runtime version 1.6 or greater.</p>
+<h3><a href="#overview" name="overview" class="anchor"><span class="anchor-link"></span></a>Overview</h3>
+<p>A user downloads the launcher jar and creates a script to run it. In this documentation, the script will be assumed to be called <code>launch</code>. For Unix, the script would look like: <code>java -jar sbt-launcher.jar &quot;$@&quot;</code></p>
+<p>The user can now launch servers and applications which provide sbt launcher configuration.</p>
+<p>Alternatively, you can repackage the launcher with a launcher configuration file. For example, <a href="https://github.com/sbt/sbt">sbt/sbt</a> pulls in the raw JAR and <a href="launcher-inject">injects the appropriate boot.properties files for sbt</a>.</p>
+<h3><a href="#applications" name="applications" class="anchor"><span class="anchor-link"></span></a>Applications</h3>
+<p>To launch an application, the user then downloads the configuration file for the application (call it <code>my.app.configuration</code>) and creates a script to launch it (call it <code>myapp</code>):</p>
+<pre class="prettyprint"><code class="language-shell">launch @my.app.configuration &quot;$@&quot;
+</code></pre>
+<p>The user can then launch the application using <code>myapp arg1 arg2 ...</code></p>
+<p>More on launcher configuration can be found at <a href="configuration.html">Launcher Configuration</a></p>
+<h4><a href="#servers" name="servers" class="anchor"><span class="anchor-link"></span></a>Servers</h4>
+<p>The sbt launcher can be used to launch and discover running servers on the system. The launcher can be used to launch servers similarly to applications. However, if desired, the launcher can also be used to ensure that only one instance of a server is running at time. This is done by having clients always use the launcher as a <em>service locator</em>.</p>
+<p>To discover where a server is running (or launch it if it is not running), the user downloads the configuration file for the server (call it <code>my.server.configuration</code>) and creates a script to discover the server (call it <code>find-myserver</code>):</p>
+<pre class="prettyprint"><code class="language-shell">launch --locate @my.server.properties.
+</code></pre>
+<p>This command will print out one string, the URI at which to reach the server, e.g. <code>sbt://127.0.0.1:65501</code>. Clients should use the IP/port to connect to to the server and initiate their connection.</p>
+<p>When using the <code>locate</code> feature, the sbt launcher makes the following restrictions to servers:</p>
+<ul>
+  <li>The Server must have a starting class that extends the <code>xsbti.ServerMain</code> class.</li>
+  <li>The Server must have an entry point (URI) that clients can use to detect the server.</li>
+  <li>The server must have defined a lock file which the launcher can use to ensure that only one instance is running at a  time.</li>
+  <li>The filesystem on which the lock file resides must support locking.</li>
+  <li>The server must allow the launcher to open a socket against the port without sending any data. This is used to check  if a previous server is still alive.</li>
+</ul>
+<h4><a href="#resolving-applications-servers" name="resolving-applications-servers" class="anchor"><span class="anchor-link"></span></a>Resolving Applications/Servers</h4>
+<p>Like the launcher used to distribute <code>sbt</code>, the downloaded launcher jar will retrieve Scala and the application according to the provided configuration file. The versions may be fixed or read from a different configuration file (the location of which is also configurable). The location to which the Scala and application jars are downloaded is configurable as well. The repositories searched are configurable. Optional initialization of a properties file on launch is configurable.</p>
+<p>Once the launcher has downloaded the necessary jars, it loads the application/server and calls its entry point. The application is passed information about how it was called: command line arguments, current working directory, Scala version, and application ID (organization, name, version). In addition, the application can ask the launcher to perform operations such as obtaining the Scala jars and a <code>ClassLoader</code> for any version of Scala retrievable from the repositories specified in the configuration file. It can request that other applications be downloaded and run. When the application completes, it can tell the launcher to exit with a specific exit code or to reload the application with a different version of Scala, a different version of the application, or different arguments.</p>
+<p>There are some other options for setup, such as putting the configuration file inside the launcher jar and distributing that as a single download. The rest of this documentation describes the details of configuring, writing, distributing, and running the application.</p>
+<h4><a href="#creating-a-launched-application" name="creating-a-launched-application" class="anchor"><span class="anchor-link"></span></a>Creating a Launched Application</h4>
+<p>This section shows how to make an application that is launched by this launcher. First, declare a dependency on the <code>launcher-interface</code>. Do not declare a dependency on the launcher itself. The launcher interface consists strictly of Java interfaces in order to avoid binary incompatibility between the version of Scala used to compile the launcher and the version used to compile your application. The launcher interface class will be provided by the launcher, so it is only a compile-time dependency. If you are building with sbt, your dependency definition would be:</p>
+<pre class="prettyprint"><code class="language-scala">libraryDependencies += &quot;org.scala-sbt&quot; % &quot;launcher-interface&quot; % &quot;1.0.0&quot; % &quot;provided&quot;
+
+resolvers += sbtResolver.value
+</code></pre>
+<p>Make the entry point to your class implement <code>xsbti.AppMain</code>. An example that uses some of the information:</p>
+<pre class="prettyprint"><code class="language-scala">package com.acme.launcherapp
+
+class Main extends xsbti.AppMain {
+  def run(configuration: xsbti.AppConfiguration) = {
+    // get the version of Scala used to launch the application
+    val scalaVersion = configuration.provider.scalaProvider.version
+
+    // Print a message and the arguments to the application
+    println(s&quot;Hello world!  Running Scala ${scalaVersion}&quot;)
+    configuration.arguments.foreach(println)
+
+    // demonstrate the ability to reboot the application into different versions of Scala
+    // and how to return the code to exit with
+    scalaVersion match {
+      case &quot;2.10.6&quot; =&gt;
+        new xsbti.Reboot {
+          def arguments = configuration.arguments
+          def baseDirectory = configuration.baseDirectory
+          def scalaVersion = &quot;2.11.8&quot;
+          def app = configuration.provider.id
+        }
+        case &quot;2.11.8&quot; =&gt; new Exit(1)
+        case _ =&gt; new Exit(0)
+      }
+    }
+    class Exit(val code: Int) extends xsbti.Exit
+}
+</code></pre>
+<p>Next, define a configuration file for the launcher. For the above class, it might look like:</p>
+<pre><code>[scala]
+  version: 2.11.8
+[app]
+  org: com.acme
+  name: launcherapp
+  version: 0.0.1
+  class: com.acme.launcherapp.Main
+  cross-versioned: true
+[repositories]
+  local
+  maven-central
+[boot]
+ directory: ${user.home}/.myapp/boot
+</code></pre>
+<p>Then, <code>publishLocal</code> or <code>+publishLocal</code> the application in sbt&rsquo;s shell to make it available. For more information, see <a href="configuration.html">Launcher Configuration</a>.</p>
+<h4><a href="#running-an-application" name="running-an-application" class="anchor"><span class="anchor-link"></span></a>Running an Application</h4>
+<p>As mentioned above, there are a few options to actually run the application. The first involves providing a modified jar for download. The second two require providing a configuration file for download.</p>
+<ul>
+  <li>Replace the <code>/sbt/sbt.boot.properties</code> file in the launcher jar and distribute the modified jar. The user would need a  script to run <code>java -jar your-launcher.jar arg1 arg2 ....</code></li>
+  <li>The user downloads the launcher jar and you provide the configuration file.
+    <ul>
+      <li>The user needs to run <code>java -Dsbt.boot.properties=your.boot.properties -jar launcher.jar</code>.</li>
+      <li>The user already has a script to run the launcher (call it &lsquo;launch&rsquo;). The user needs to run <code>launch
+  @your.boot.properties your-arg-1 your-arg-2</code></li>
+    </ul>
+  </li>
+</ul>
+<h4><a href="#execution" name="execution" class="anchor"><span class="anchor-link"></span></a>Execution</h4>
+<p>Let&rsquo;s review what&rsquo;s happening when the launcher starts your application.</p>
+<p>On startup, the launcher searches for its configuration and then parse it. Once the final configuration is resolved, the launcher proceeds to obtain the necessary jars to launch the application. The <code>boot.directory</code> property is used as a base directory to retrieve jars to. Locking is done on the directory, so it can be shared system-wide. The launcher retrieves the requested version of Scala to:</p>
+<pre class="prettyprint"><code class="language-shell">${boot.directory}/${scala.version}/lib/
+</code></pre>
+<p>If this directory already exists, the launcher takes a shortcut for startup performance and assumes that the jars have already been downloaded. If the directory does not exist, the launcher uses Apache Ivy to resolve and retrieve the jars. A similar process occurs for the application itself. It and its dependencies are retrieved to:</p>
+<pre class="prettyprint"><code class="language-shell">${boot.directory}/${scala.version}/${app.org}/${app.name}/.
+</code></pre>
+<p>Once all required code is downloaded, the class loaders are set up. The launcher creates a class loader for the requested version of Scala. It then creates a child class loader containing the jars for the requested <code>app.components</code> and with the paths specified in <code>app.resources</code>. An application that does not use components will have all of its jars in this class loader.</p>
+<p>The main class for the application is then instantiated. It must be a public class with a public no-argument constructor and must conform to <code>xsbti.AppMain</code>. The <code>run</code> method is invoked and execution passes to the application. The argument to the &lsquo;run&rsquo; method provides configuration information and a callback to obtain a class loader for any version of Scala that can be obtained from a repository in [repositories]. The return value of the run method determines what is done after the application executes. It can specify that the launcher should restart the application or that it should exit with the provided exit code.</p>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/developing-sbt/launcher/getting-started.md">here</a>.
+</div>
+
+<div class="nav-next">
+<p><strong>Next:</strong> <a href="../../developing-sbt/launcher/architecture.html">Architecture</a></p>
+</div>
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../../developing-sbt/launcher/getting-started.html#getting-started-with-the-sbt-launcher" class="header">Getting Started with the sbt launcher</a>
+  <ul>
+    <li><a href="../../developing-sbt/launcher/getting-started.html#overview" class="header">Overview</a></li>
+    <li><a href="../../developing-sbt/launcher/getting-started.html#applications" class="header">Applications</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2017</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="../../lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="../../js/magellan.js"></script>
+
+<style type="text/css">@import "../../lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="../../lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="../../lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>

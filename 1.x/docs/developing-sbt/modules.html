@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Getting Started · sbt Reference Manual</title>
+<title>Modularization · sbt Reference Manual</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='website'/>
@@ -35,7 +35,7 @@
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../getting-started/index.html" class="active page">Getting Started with sbt</a>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
   <ul>
     <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
     <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
@@ -50,7 +50,7 @@
   </ul></li>
   <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
   <ul>
-    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/modules.html" class="active page">Modularization</a></li>
     <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
     <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
     <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
@@ -94,7 +94,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="../getting-started/index.html" class="active page">Getting Started with sbt</a>
+  <li><a href="../getting-started/index.html" class="page">Getting Started with sbt</a>
   <ul>
     <li><a href="../getting-started/setup.html" class="page">Installing sbt</a></li>
     <li><a href="../getting-started/hello-world.html" class="page">Hello, World</a></li>
@@ -109,7 +109,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
   </ul></li>
   <li><a href="../developing-sbt/index.html" class="page">Developing sbt</a>
   <ul>
-    <li><a href="../developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="../developing-sbt/modules.html" class="active page">Modularization</a></li>
     <li><a href="../developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
     <li><a href="../developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
     <li><a href="../developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
@@ -131,7 +131,8 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="nav-breadcrumbs">
 <ul>
   <li><a href="../index.html">sbt Reference Manual</a></li>
-  <li>Getting Started with sbt</li>
+  <li><a href="../developing-sbt/index.html">Developing sbt</a></li>
+  <li>Modularization</li>
 </ul>
 </div>
 </div>
@@ -139,22 +140,61 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h2><a href="#getting-started-with-sbt" name="getting-started-with-sbt" class="anchor"><span class="anchor-link"></span></a>Getting Started with sbt</h2>
-<p>sbt uses a small number of concepts to support flexible and powerful build definitions. There are not that many concepts, but sbt is not exactly like other build systems and there are details you <em>will</em> stumble on if you haven&rsquo;t read the documentation.</p>
-<p>The Getting Started Guide covers the concepts you need to know to create and maintain an sbt build definition.</p>
-<p>It is <em>highly recommended</em> to read the Getting Started Guide!</p>
-<p>If you are in a huge hurry, the most important conceptual background can be found in <a href="Basic-Def.html">build definition</a>, <a href="Scopes.html">scopes</a>, and <a href="Task-Graph.html">task graph</a>. But we don&rsquo;t promise that it&rsquo;s a good idea to skip the other pages in the guide.</p>
-<p>It&rsquo;s best to read in order, as later pages in the Getting Started Guide build on concepts introduced earlier.</p>
-<p>Thanks for trying out sbt and <em>have fun</em>!</p>
+<h2><a href="#modularization" name="modularization" class="anchor"><span class="anchor-link"></span></a>Modularization</h2>
+<p>The process we aim to take for sbt 1.0 is to disassemble sbt into smaller modules and layers. To be clear, sbt 0.13&rsquo;s codebase already does consist of numerous subprojects.</p>
+<p>Layers are more coarse-grained sets of subproject(s) that can be used independently. Another purpose of the modularization is to distinguish between public API and internal implementation. Reducing the surface area of the sbt code base has several benefits:</p>
+<ul>
+  <li>It makes it easier for the build users and the plugin authors to learn the APIs.</li>
+  <li>It makes it easier for us to maintain binary and semantic compatibilities.</li>
+  <li>It encourages the reuse of the modules.</li>
+</ul>
+<p>The following is a conceptual diagram of the layers:</p>
+<p><img src="/1.x/docs/files/module-diagram.png" alt="Module diagram" /></p>
+<p>This diagram is arranged such that each layer depends only on the layers underneath it.</p>
+<h2><a href="#module-summary" name="module-summary" class="anchor"><span class="anchor-link"></span></a>Module summary</h2>
+<h3><a href="#io-api-" name="io-api-" class="anchor"><span class="anchor-link"></span></a>IO API (<a href="https://github.com/sbt/io">sbt/io</a>)</h3>
+<p>IO API is a low level API to deal with files and directories.</p>
+<h3><a href="#serialization-api-" name="serialization-api-" class="anchor"><span class="anchor-link"></span></a>Serialization API (<a href="https://github.com/sbt/serialization">sbt/serialization</a>)</h3>
+<p>Serialization API is an opinionated wrapper around <a href="https://github.com/scala/pickling">Scala Pickling</a>. The responsibility of the serialization API is to turn values into JSON.</p>
+<h3><a href="#util-apis-" name="util-apis-" class="anchor"><span class="anchor-link"></span></a>Util APIs (<a href="https://github.com/sbt/util">sbt/util</a>)</h3>
+<p>Util APIs provide commonly used features like logging and internal datatypes used by sbt.</p>
+<h3><a href="#librarymanagement-api-" name="librarymanagement-api-" class="anchor"><span class="anchor-link"></span></a>LibraryManagement API (<a href="https://github.com/sbt/librarymanagement">sbt/librarymanagement</a>)</h3>
+<p>sbt&rsquo;s library management system is based on Apache Ivy, and as such the concepts and terminology around the library management system are also influenced by Ivy. The responsibility of the library management API is to calculate the transitive dependency graph, and download artifacts from the given repositories.</p>
+<h3><a href="#incrementalcompiler-api-" name="incrementalcompiler-api-" class="anchor"><span class="anchor-link"></span></a>IncrementalCompiler API (<a href="https://github.com/sbt/zinc">sbt/zinc</a>)</h3>
+<p>Incremental compilation of Scala is so fundamental that we now seldom think of it as a feature of sbt. There are number of subprojects/classes involved that are actually internal details, and we should use this opportunity to hide them.</p>
+<h3><a href="#build-api-tbd-" name="build-api-tbd-" class="anchor"><span class="anchor-link"></span></a>Build API (tbd)</h3>
+<p>This is the part that&rsquo;s exposed to <code>build.sbt</code>. The responsibility of the module is to load the build files and plugins, and provide a way for commands to be executed on the state.</p>
+<p>This might remain at <a href="https://github.com/sbt/sbt">sbt/sbt</a>.</p>
+<h3><a href="#sbt-launcher-" name="sbt-launcher-" class="anchor"><span class="anchor-link"></span></a>sbt Launcher (<a href="https://github.com/sbt/launcher">sbt/launcher</a>)</h3>
+<p>The sbt launcher provides a generic container that can load and run programs resolved using the Ivy dependency manager. sbt uses this as the deployment mechanism, but it can be used for other purposes.</p>
+<p>See <a href="https://github.com/foundweekends/conscript">foundweekends/conscript</a> and <a href="Sbt-Launcher.html">Launcher</a> for more details.</p>
+<h3><a href="#client-server-tbd-" name="client-server-tbd-" class="anchor"><span class="anchor-link"></span></a>Client/Server (tbd)</h3>
+<p>Currently developed in <a href="https://github.com/sbt/sbt-remote-control">sbt/sbt-remote-control</a>. sbt Server provides a JSON-based API wrapping functionality of the command line experience.</p>
+<p>One of the clients will be the &ldquo;terminal client&rdquo;, which subsumes the command line sbt shell. Other clients that are planned are IDE integrations.</p>
+<h3><a href="#website-" name="website-" class="anchor"><span class="anchor-link"></span></a>Website (<a href="https://github.com/sbt/website">sbt/website</a>)</h3>
+<p>This website&rsquo;s source.</p>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/getting-started/index.md">here</a>.
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/developing-sbt/modules.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="../getting-started/setup.html">Installing sbt</a></p>
+<p><strong>Next:</strong> <a href="../developing-sbt/coding-guidelines.html">Coding Guidelines</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="../developing-sbt/modules.html#modularization" class="header">Modularization</a>
+  <ul>
+    <li><a href="../developing-sbt/modules.html#module-summary" class="header">Module summary</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
 </div>
 </div>
 

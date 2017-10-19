@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+<title> · sbt Reference Manual</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content='website'/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
+<script type="text/javascript" src="js/groups.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/normalize.css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="lib/foundation/dist/foundation.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/page.css"/>
+
+<!--
+<link rel="shortcut icon" href="images/favicon.ico" />
+-->
+</head>
+
+<body>
+<div class="off-canvas-wrapper">
+<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+<div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
+<nav class="off-canvas-nav">
+<div class="nav-home">
+<a href="index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="faq.html" class="active page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="off-canvas-content" data-off-canvas-content>
+
+<header class="site-header expanded row">
+<div class="small-12 column">
+<a href="#" class="off-canvas-toggle hide-for-medium" data-toggle="off-canvas-menu"><svg class="svg-icon svg-icon-menu" version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"> <path class="svg-icon-menu-path" fill="#53CDEC" d="M16.4,9H3.6C3.048,9,3,9.447,3,10c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,9.447,16.952,9,16.4,9z M16.4,13
+H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
+C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
+</a>
+<div class="title"><a href="index.html">sbt Reference Manual</a></div>
+
+<!--
+<a href="https://www.example.com" class="logo show-for-medium">logo</a>
+-->
+</div>
+</header>
+
+<div class="expanded row">
+
+<div class="medium-3 large-2 show-for-medium column">
+<nav class="site-nav">
+<div class="nav-home">
+<a href="index.html" >
+<span class="home-icon">⌂</span>sbt Reference Manual
+</a>
+<div class="version-number">
+1.0.2
+</div>
+</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="getting-started/index.html" class="page">Getting Started with sbt</a>
+  <ul>
+    <li><a href="getting-started/setup.html" class="page">Installing sbt</a></li>
+    <li><a href="getting-started/hello-world.html" class="page">Hello, World</a></li>
+    <li><a href="getting-started/running.html" class="page">Running sbt</a></li>
+  </ul></li>
+  <li><a href="plugin-developers/index.html" class="page">sbt for Plugin Developers</a>
+  <ul>
+    <li><a href="plugin-developers/anatomy.html" class="page">Anatomy of an sbt Plugin</a></li>
+    <li><a href="plugin-developers/testing.html" class="page">Testing sbt Plugins</a></li>
+    <li><a href="plugin-developers/best-practices.html" class="page">Best Practices</a></li>
+    <li><a href="plugin-developers/cross-building.html" class="page">Cross-building Plugins</a></li>
+  </ul></li>
+  <li><a href="developing-sbt/index.html" class="page">Developing sbt</a>
+  <ul>
+    <li><a href="developing-sbt/modules.html" class="page">Modularization</a></li>
+    <li><a href="developing-sbt/coding-guidelines.html" class="page">Coding Guidelines</a></li>
+    <li><a href="developing-sbt/sbt-datatype.html" class="page">sbt-datatype</a></li>
+    <li><a href="developing-sbt/compiler-interface/index.html" class="page">Compiler Interface</a></li>
+    <li><a href="developing-sbt/launcher/index.html" class="page">sbt Launcher</a></li>
+    <li><a href="developing-sbt/developer-notes/index.html" class="page">Developer Notes</a></li>
+  </ul></li>
+  <li><a href="faq.html" class="active page">FAQ</a></li>
+</ul>
+</div>
+
+</nav>
+</div>
+
+<div class="small-12 medium-9 large-10 column">
+<section class="site-content">
+
+<div class="page-header row">
+<div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="index.html">sbt Reference Manual</a></li>
+  <li>FAQ</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-content row">
+<div class="small-12 large-9 column" id="docs">
+<h2><a href="#frequently-asked-questions" name="frequently-asked-questions" class="anchor"><span class="anchor-link"></span></a>Frequently Asked Questions</h2>
+<h3><a href="#project-information" name="project-information" class="anchor"><span class="anchor-link"></span></a>Project Information</h3>
+<h4><a href="#what-does-the-name-stand-for-and-why-shouldnt-it-be-written-" name="what-does-the-name-stand-for-and-why-shouldnt-it-be-written-" class="anchor"><span class="anchor-link"></span></a>What does the name &ldquo;sbt&rdquo; stand for, and why shouldn&rsquo;t it be written &ldquo;SBT&rdquo;?</h4>
+<p><strong>TL;DR</strong> the name sbt doesn&rsquo;t stand for anything, it&rsquo;s just &ldquo;sbt&rdquo;, and it should be written that way.</p>
+<p>When Mark Harrah (<a href="https://github.com/harrah">@harrah</a>) first created the project he called it &ldquo;Simple Build Tool&rdquo;, but in his <a href="http://www.scala-lang.org/old/node/392.html">first public announcement</a> of it he already referred to it as just &ldquo;sbt&rdquo;. Over time some have re-defined sbt to stand for &ldquo;Scala Build Tool&rdquo;, but we believe that isn&rsquo;t accurate either given it can be used to build Java-only projects.</p>
+<p>Nowadays we just call sbt &ldquo;sbt&rdquo;, and to reinforce that the name is no longer an <a href="https://en.oxforddictionaries.com/definition/initialism">initialism</a> we always write it in all lowercase letters. However, we are cool with <a href="https://ja.wikipedia.org/wiki/%E9%85%A2%E8%B1%9A">酢豚</a> (subuta) as a nickname.</p>
+<h4><a href="#how-do-i-get-help-" name="how-do-i-get-help-" class="anchor"><span class="anchor-link"></span></a>How do I get help?</h4>
+<ul>
+  <li>See <a href="http://www.scala-sbt.org/community.html#how-can-I-get-help">Get Involved</a></li>
+</ul>
+<h4><a href="#how-do-i-report-a-bug-" name="how-do-i-report-a-bug-" class="anchor"><span class="anchor-link"></span></a>How do I report a bug?</h4>
+<ul>
+  <li>See <a href="http://www.scala-sbt.org/community.html#how-can-I-help">Get Involved</a></li>
+</ul>
+<h4><a href="#how-can-i-help-" name="how-can-i-help-" class="anchor"><span class="anchor-link"></span></a>How can I help?</h4>
+<ul>
+  <li>See <a href="http://www.scala-sbt.org/community.html#how-can-I-help">Get Involved</a></li>
+</ul>
+<h3><a href="#usage" name="usage" class="anchor"><span class="anchor-link"></span></a>Usage</h3>
+<h4><a href="#my-last-command-didnt-work-but-i-cant-see-an-explanation-why-" name="my-last-command-didnt-work-but-i-cant-see-an-explanation-why-" class="anchor"><span class="anchor-link"></span></a>My last command didn&rsquo;t work but I can&rsquo;t see an explanation. Why?</h4>
+<p>sbt 1.0.2 by default suppresses most stack traces and debugging information. It has the nice side effect of giving you less noise on screen, but as a newcomer it can leave you lost for explanation. To see the previous output of a command at a higher verbosity, type <code>last &lt;task&gt;</code> where <code>&lt;task&gt;</code> is the task that failed or that you want to view detailed output for.</p>
+<p>For example, if you find that your <code>update</code> fails to load all the dependencies as you expect you can enter:</p>
+<pre><code>&gt; last update
+</code></pre>
+<p>and it will display the full output from the last run of the <code>update</code> command.</p>
+<h4><a href="#how-do-i-disable-ansi-codes-in-the-output-" name="how-do-i-disable-ansi-codes-in-the-output-" class="anchor"><span class="anchor-link"></span></a>How do I disable ansi codes in the output?</h4>
+<p>Sometimes sbt doesn&rsquo;t detect that ansi codes aren&rsquo;t supported and you get output that looks like:</p>
+<pre><code>[0m[ [0minfo [0m]  [0mSet current project to root
+</code></pre>
+<p>or ansi codes are supported but you want to disable colored output. To completely disable ansi codes, pass <code>-no-colors</code> option:</p>
+<pre class="prettyprint"><code class="language-shell">$ sbt -no-colors
+</code></pre>
+<h4><a href="#how-can-i-start-a-scala-interpreter-repl-with-sbt-project-configuration-dependencies-etc-" name="how-can-i-start-a-scala-interpreter-repl-with-sbt-project-configuration-dependencies-etc-" class="anchor"><span class="anchor-link"></span></a>How can I start a Scala interpreter (REPL) with sbt project configuration (dependencies, etc.)?</h4>
+<p>In the sbt shell run <code>console</code>.</p>
+<h3><a href="#build-definitions" name="build-definitions" class="anchor"><span class="anchor-link"></span></a>Build definitions</h3>
+<h4><a href="#what-are-the-and-methods-" name="what-are-the-and-methods-" class="anchor"><span class="anchor-link"></span></a>What are the <code>:=</code>, <code>+=</code>, and <code>++=</code> methods?</h4>
+<p>These are methods on keys used to construct a <code>Setting</code> or a <code>Task</code>. The Getting Started Guide covers all these methods, see <a href="Basic-Def.html">.sbt build definition</a>, <a href="Task-Graph.html">task graph</a>, and <a href="Appending-Values.html">appending values</a> for examples.</p>
+<h4><a href="#what-is-the-method-" name="what-is-the-method-" class="anchor"><span class="anchor-link"></span></a>What is the <code>%</code> method?</h4>
+<p>It&rsquo;s used to create a <code>ModuleID</code> from strings, when specifying managed dependencies. Read the Getting Started Guide about <a href="Library-Dependencies.html">library dependencies</a>.</p>
+<h4><a href="#what-is-moduleid-project-" name="what-is-moduleid-project-" class="anchor"><span class="anchor-link"></span></a>What is <code>ModuleID</code>, <code>Project</code>, &hellip;?</h4>
+<p>To figure out an unknown type or method, have a look at the <a href="Getting-Started.html">Getting Started Guide</a> if you have not. Also try the <a href="Name-Index.html">index</a> of commonly used methods, values, and types, the <a href="../api/">API Documentation</a> and the <a href="../sxr/">hyperlinked sources</a>.</p>
+<h4><a href="#how-do-i-add-files-to-a-jar-package-" name="how-do-i-add-files-to-a-jar-package-" class="anchor"><span class="anchor-link"></span></a>How do I add files to a jar package?</h4>
+<p>The files included in an artifact are configured by default by a task <code>mappings</code> that is scoped by the relevant package task. The <code>mappings</code> task returns a sequence <code>Seq[(File,String)]</code> of mappings from the file to include to the path within the jar. See <a href="Mapping-Files.html">mapping files</a> for details on creating these mappings.</p>
+<p>For example, to add generated sources to the packaged source artifact:</p>
+<pre class="prettyprint"><code class="language-scala">mappings in (Compile, packageSrc) ++= {
+  import Path.{flat, relativeTo}
+  val base = (sourceManaged in Compile).value
+  val srcs = (managedSources in Compile).value
+  srcs x (relativeTo(base) | flat)
+}
+</code></pre>
+<p>This takes sources from the <code>managedSources</code> task and relativizes them against the <code>managedSource</code> base directory, falling back to a flattened mapping. If a source generation task doesn&rsquo;t write the sources to the <code>managedSource</code> directory, the mapping function would have to be adjusted to try relativizing against additional directories or something more appropriate for the generator.</p>
+<h4><a href="#how-can-i-generate-source-code-or-resources-" name="how-can-i-generate-source-code-or-resources-" class="anchor"><span class="anchor-link"></span></a>How can I generate source code or resources?</h4>
+<p>See <a href="Howto-Generating-Files.html">Generating Files</a>.</p>
+<h4><a href="#how-can-a-task-avoid-redoing-work-if-the-input-files-are-unchanged-" name="how-can-a-task-avoid-redoing-work-if-the-input-files-are-unchanged-" class="anchor"><span class="anchor-link"></span></a>How can a task avoid redoing work if the input files are unchanged?</h4>
+<p>There is basic support for only doing work when input files have changed or when the outputs haven&rsquo;t been generated yet. This support is primitive and subject to change.</p>
+<p>The relevant methods are two overloaded methods called <a href="../api/sbt/FileFunction\$.html">FileFunction.cached</a>. Each requires a directory in which to store cached data. Sample usage is:</p>
+<pre class="prettyprint"><code class="language-scala">// define a task that takes some inputs
+//   and generates files in an output directory
+myTask := {
+  // wraps a function taskImpl in an uptodate check
+  //   taskImpl takes the input files, the output directory,
+  //   generates the output files and returns the set of generated files
+  val cachedFun = FileFunction.cached(cacheDirectory.value / &quot;my-task&quot;) { (in: Set[File]) =&gt;
+    taskImpl(in, target.value) : Set[File]
+  }
+  // Applies the cached function to the inputs files
+  cachedFun(inputs.value)
+}
+</code></pre>
+<p>There are two additional arguments for the first parameter list that allow the file tracking style to be explicitly specified. By default, the input tracking style is <code>FilesInfo.lastModified</code>, based on a file&rsquo;s last modified time, and the output tracking style is <code>FilesInfo.exists</code>, based only on whether the file exists. The other available style is <code>FilesInfo.hash</code>, which tracks a file based on a hash of its contents. See the <a href="../api/sbt/FilesInfo\$.html">FilesInfo API</a> for details.</p>
+<p>A more advanced version of <code>FileFunction.cached</code> passes a data structure of type <a href="../api/sbt/ChangeReport.html">ChangeReport</a> describing the changes to input and output files since the last evaluation. This version of <code>cached</code> also expects the set of files generated as output to be the result of the evaluated function.</p>
+<h3><a href="#extending-sbt" name="extending-sbt" class="anchor"><span class="anchor-link"></span></a>Extending sbt</h3>
+<h4><a href="#how-can-i-add-a-new-configuration-" name="how-can-i-add-a-new-configuration-" class="anchor"><span class="anchor-link"></span></a>How can I add a new configuration?</h4>
+<p>The following example demonstrates adding a new set of compilation settings and tasks to a new configuration called <code>samples</code>. The sources for this configuration go in <code>src/samples/scala/</code>. Unspecified settings delegate to those defined for the <code>compile</code> configuration. For example, if <code>scalacOptions</code> are not overridden for <code>samples</code>, the options for the main sources are used.</p>
+<p>Options specific to <code>samples</code> may be declared like:</p>
+<pre class="prettyprint"><code class="language-scala">scalacOptions in Samples += &quot;-deprecation&quot;
+</code></pre>
+<p>This uses the main options as base options because of <code>+=</code>. Use <code>:=</code> to ignore the main options:</p>
+<pre class="prettyprint"><code class="language-scala">scalacOptions in Samples := &quot;-deprecation&quot; :: Nil
+</code></pre>
+<p>The example adds all of the usual compilation related settings and tasks to <code>samples</code>:</p>
+<pre><code>samples:run
+samples:runMain
+samples:compile
+samples:console
+samples:consoleQuick
+samples:scalacOptions
+samples:fullClasspath
+samples:package
+samples:packageSrc
+...
+</code></pre>
+<h4><a href="#how-do-i-add-a-test-configuration-" name="how-do-i-add-a-test-configuration-" class="anchor"><span class="anchor-link"></span></a>How do I add a test configuration?</h4>
+<p>See the <a href="Testing.html#additional-test-configurations">Additional test configurations</a> section of <a href="Testing.html">Testing</a>.</p>
+<h4><a href="#how-can-i-create-a-custom-run-task-in-addition-to-run-" name="how-can-i-create-a-custom-run-task-in-addition-to-run-" class="anchor"><span class="anchor-link"></span></a>How can I create a custom run task, in addition to <code>run</code>?</h4>
+<p>This answer is extracted from a <a href="https://groups.google.com/group/simple-build-tool/browse_thread/thread/4c28ee5b7e18b46a/">mailing list discussion</a>.</p>
+<p>Read the Getting Started Guide up to <a href="Custom-Settings.html">custom settings</a> for background.</p>
+<p>A basic run task is created by:</p>
+<pre class="prettyprint"><code class="language-scala">lazy val myRunTask = taskKey[Unit](&quot;A custom run task.&quot;)
+
+// this can go either in a `build.sbt` or the settings member
+//   of a Project in a full configuration
+fullRunTask(myRunTask, Test, &quot;foo.Foo&quot;, &quot;arg1&quot;, &quot;arg2&quot;)
+</code></pre>
+<p>If you want to be able to supply arguments on the command line, replace <code>TaskKey</code> with <code>InputKey</code> and <code>fullRunTask</code> with <code>fullRunInputTask</code>. The <code>Test</code> part can be replaced with another configuration, such as <code>Compile</code>, to use that configuration&rsquo;s classpath.</p>
+<p>This run task can be configured individually by specifying the task key in the scope. For example:</p>
+<pre class="prettyprint"><code class="language-scala">fork in myRunTask := true
+
+javaOptions in myRunTask += &quot;-Xmx6144m&quot;
+</code></pre>
+<h4><a href="#how-should-i-express-a-dependency-on-an-outside-tool-such-as-proguard-" name="how-should-i-express-a-dependency-on-an-outside-tool-such-as-proguard-" class="anchor"><span class="anchor-link"></span></a>How should I express a dependency on an outside tool such as proguard?</h4>
+<p>Tool dependencies are used to implement a task and are not needed by project source code. These dependencies can be declared in their own configuration and classpaths. These are the steps:</p>
+<ol>
+  <li>Define a new <a href="Library-Management.html#ivy-configurations">configuration</a>.</li>
+  <li>Declare the tool <a href="Library-Management.html">dependencies</a> in that configuration.</li>
+  <li>Define a classpath that pulls the dependencies from the <a href="Update-Report.html">Update Report</a> produced by <code>update</code>.</li>
+  <li>Use the classpath to implement the task.</li>
+</ol>
+<p>As an example, consider a <code>proguard</code> task. This task needs the ProGuard jars in order to run the tool. First, define and add the new configuration:</p>
+<pre class="prettyprint"><code class="language-scala">val ProguardConfig = config(&quot;proguard&quot;) hide
+
+ivyConfigurations += ProguardConfig
+</code></pre>
+<p>Then,</p>
+<pre class="prettyprint"><code class="language-scala">// Add proguard as a dependency in the custom configuration.
+//  This keeps it separate from project dependencies.
+libraryDependencies +=
+   &quot;net.sf.proguard&quot; % &quot;proguard&quot; % &quot;4.4&quot; % ProguardConfig.name
+
+// Extract the dependencies from the UpdateReport.
+managedClasspath in proguard := {
+    // these are the types of artifacts to include
+    val artifactTypes: Set[String] = (classpathTypes in proguard).value
+    Classpaths.managedJars(proguardConfig, artifactTypes, update.value)
+}
+
+// Use the dependencies in a task, typically by putting them
+//  in a ClassLoader and reflectively calling an appropriate
+//  method.
+proguard := {
+    val cp: Seq[File] = (managedClasspath in proguard).value
+  // ... do something with , which includes proguard ...
+}
+</code></pre>
+<p>Defining the intermediate classpath is optional, but it can be useful for debugging or if it needs to be used by multiple tasks. It is also possible to specify artifact types inline. This alternative <code>proguard</code> task would look like:</p>
+<pre class="prettyprint"><code class="language-scala">proguard := {
+   val artifactTypes = Set(&quot;jar&quot;)
+    val cp: Seq[File] =
+      Classpaths.managedJars(proguardConfig, artifactTypes, update.value)
+  // ... do something with , which includes proguard ...
+}
+</code></pre>
+<h4><a href="#how-would-i-change-sbts-classpath-dynamically-" name="how-would-i-change-sbts-classpath-dynamically-" class="anchor"><span class="anchor-link"></span></a>How would I change sbt&rsquo;s classpath dynamically?</h4>
+<p>It is possible to register additional jars that will be placed on sbt&rsquo;s classpath (since version 0.10.1). Through <a href="../api/sbt/State\$.html">State</a>, it is possible to obtain a <a href="../api/xsbti/ComponentProvider.html">xsbti.ComponentProvider</a>, which manages application components. Components are groups of files in the <code>~/.sbt/boot/</code> directory and, in this case, the application is sbt. In addition to the base classpath, components in the &ldquo;extra&rdquo; component are included on sbt&rsquo;s classpath.</p>
+<p>(Note: the additional components on an application&rsquo;s classpath are declared by the <code>components</code> property in the <code>[main]</code> section of the launcher configuration file <code>boot.properties</code>.)</p>
+<p>Because these components are added to the <code>~/.sbt/boot/</code> directory and <code>~/.sbt/boot/</code> may be read-only, this can fail. In this case, the user has generally intentionally set sbt up this way, so error recovery is not typically necessary (just a short error message explaining the situation).</p>
+<h4><a href="#example-of-dynamic-classpath-augmentation" name="example-of-dynamic-classpath-augmentation" class="anchor"><span class="anchor-link"></span></a>Example of dynamic classpath augmentation</h4>
+<p>The following code can be used where a <code>State =&gt; State</code> is required, such as in the <code>onLoad</code> setting (described below) or in a <a href="Commands.html">command</a>. It adds some files to the &ldquo;extra&rdquo; component and reloads sbt if they were not already added. Note that reloading will drop the user&rsquo;s session state.</p>
+<pre class="prettyprint"><code class="language-scala">def augment(extra: Seq[File])(s: State): State = {
+    // Get the component provider
+  val cs: xsbti.ComponentProvider = s.configuration.provider.components()
+
+    // Adds the files in &#39;extra&#39; to the &quot;extra&quot; component
+    //   under an exclusive machine-wide lock.
+    //   The returned value is &#39;true&#39; if files were actually copied and &#39;false&#39;
+    //   if the target files already exists (based on name only).
+  val copied: Boolean = s.locked(cs.lockFile, cs.addToComponent(&quot;extra&quot;, extra.toArray))
+
+    // If files were copied, reload so that we use the new classpath.
+  if(copied) s.reload else s
+}
+</code></pre>
+<h4><a href="#how-can-i-take-action-when-the-project-is-loaded-or-unloaded-" name="how-can-i-take-action-when-the-project-is-loaded-or-unloaded-" class="anchor"><span class="anchor-link"></span></a>How can I take action when the project is loaded or unloaded?</h4>
+<p>See <a href="Howto-Startup.html">How to take an action on startup</a>.</p>
+<h4><a href="#example-of-project-load-unload-hooks" name="example-of-project-load-unload-hooks" class="anchor"><span class="anchor-link"></span></a>Example of project load/unload hooks</h4>
+<p>The following example maintains a count of the number of times a project has been loaded and prints that number:</p>
+<pre class="prettyprint"><code class="language-scala">{
+  // the key for the current count
+  val key = AttributeKey[Int](&quot;loadCount&quot;)
+  // the State transformer
+  val f = (s: State) =&gt; {
+    val previous = s get key getOrElse 0
+    println(&quot;Project load count: &quot; + previous)
+    s.put(key, previous + 1)
+  }
+  onLoad in Global := {
+    val previous = (onLoad in Global).value
+    f compose previous
+  }
+}
+</code></pre>
+<h3><a href="#errors" name="errors" class="anchor"><span class="anchor-link"></span></a>Errors</h3>
+<h4><a href="#on-project-load-" name="on-project-load-" class="anchor"><span class="anchor-link"></span></a>On project load, &ldquo;Reference to uninitialized setting&rdquo;</h4>
+<p>Setting initializers are executed in order. If the initialization of a setting depends on other settings that has not been initialized, sbt will stop loading.</p>
+<p>In this example, we try to append a library to <code>libraryDependencies</code> before it is initialized with an empty sequence.</p>
+<pre class="prettyprint"><code class="language-scala">object MyBuild extends Build {
+  val root = Project(id = &quot;root&quot;, base = file(&quot;.&quot;),
+    settings = Seq(
+      libraryDependencies += &quot;commons-io&quot; % &quot;commons-io&quot; % &quot;1.4&quot; % &quot;test&quot;
+    )
+  ).disablePlugins(plugins.IvyModule)
+}
+</code></pre>
+<p>To correct this, include the IvyModule plugin settings, which includes <code>libraryDependencies := Seq()</code>. So, we just drop the explicit disabling.</p>
+<pre class="prettyprint"><code class="language-scala">object MyBuild extends Build {
+  val root = Project(id = &quot;root&quot;, base = file(&quot;.&quot;),
+    settings = Seq(
+      libraryDependencies += &quot;commons-io&quot; % &quot;commons-io&quot; % &quot;1.4&quot; % &quot;test&quot;
+    )
+  )
+}
+</code></pre>
+<p>A more subtle variation of this error occurs when using <a href="Scopes.html">scoped settings</a>.</p>
+<pre class="prettyprint"><code class="language-scala">// error: Reference to uninitialized setting
+settings = Seq(
+  libraryDependencies += &quot;commons-io&quot; % &quot;commons-io&quot; % &quot;1.2&quot; % &quot;test&quot;,
+  fullClasspath := fullClasspath.value.filterNot(_.data.name.contains(&quot;commons-io&quot;))
+)
+</code></pre>
+<p>This setting varies between the test and compile scopes. The solution is use the scoped setting, both as the input to the initializer, and the setting that we update.</p>
+<pre class="prettyprint"><code class="language-scala">fullClasspath in Compile := (fullClasspath in Compile).value.filterNot(_.data.name.contains(&quot;commons-io&quot;))
+</code></pre>
+<h3><a href="#dependency-management" name="dependency-management" class="anchor"><span class="anchor-link"></span></a>Dependency Management</h3>
+<h4><a href="#how-do-i-resolve-a-checksum-error-" name="how-do-i-resolve-a-checksum-error-" class="anchor"><span class="anchor-link"></span></a>How do I resolve a checksum error?</h4>
+<p>This error occurs when the published checksum, such as a sha1 or md5 hash, differs from the checksum computed for a downloaded artifact, such as a jar or pom.xml. An example of such an error is:</p>
+<pre><code>[warn]  problem while downloading module descriptor:
+https://repo1.maven.org/maven2/commons-fileupload/commons-fileupload/1.2.2/commons-fileupload-1.2.2.pom:
+invalid sha1: expected=ad3fda4adc95eb0d061341228cc94845ddb9a6fe computed=0ce5d4a03b07c8b00ab60252e5cacdc708a4e6d8 (1070ms)
+</code></pre>
+<p>The invalid checksum should generally be reported to the repository owner (as <a href="https://issues.sonatype.org/browse/MVNCENTRAL-46">was done</a> for the above error). In the meantime, you can temporarily disable checking with the following setting:</p>
+<pre class="prettyprint"><code class="language-scala">checksums in update := Nil
+</code></pre>
+<p>See <a href="Library-Management.html">library management</a> for details.</p>
+<h4><a href="#ive-added-a-plugin-and-now-my-cross-compilations-fail-" name="ive-added-a-plugin-and-now-my-cross-compilations-fail-" class="anchor"><span class="anchor-link"></span></a>I&rsquo;ve added a plugin, and now my cross-compilations fail!</h4>
+<p>This problem crops up frequently. Plugins are only published for the Scala version that sbt uses (currently, 2.9.1). You can still <em>use</em> plugins during cross-compilation, because sbt only looks for a 2.9.1 version of the plugin.</p>
+<p><strong>&hellip; unless you specify the plugin in the wrong place!</strong></p>
+<p>A typical mistake is to put global plugin definitions in <code>~/.sbt/plugins.sbt</code>. <strong>THIS IS WRONG.</strong> <code>.sbt</code> files in <code>~/.sbt</code> are loaded for <em>each</em> build&ndash;that is, for <em>each</em> cross-compilation. So, if you build for Scala 2.9.0, sbt will try to find a version of the plugin that&rsquo;s compiled for 2.9.0&ndash;and it usually won&rsquo;t. That&rsquo;s because it doesn&rsquo;t <em>know</em> the dependency is a plugin.</p>
+<p>To tell sbt that the dependency is an sbt plugin, make sure you define your global plugins in a <code>.sbt</code> file in <code>~/.sbt/plugins/</code>. sbt knows that files in <code>~/.sbt/plugins</code> are only to be used by sbt itself, not as part of the general build definition. If you define your plugins in a file under <em>that</em> directory, they won&rsquo;t foul up your cross-compilations. Any file name ending in <code>.sbt</code> will do, but most people use <code>~/.sbt/plugins/build.sbt</code> or <code>~/.sbt/plugins/plugins.sbt</code>.</p>
+<h3><a href="#miscellaneous" name="miscellaneous" class="anchor"><span class="anchor-link"></span></a>Miscellaneous</h3>
+<h4><a href="#where-can-i-find-plugins-for-" name="where-can-i-find-plugins-for-" class="anchor"><span class="anchor-link"></span></a>Where can I find plugins for 1.0.2?</h4>
+<p>See <a href="Community-Plugins.html">Community Plugins</a> for a list of currently available plugins.</p>
+<div class="source-github">
+The source code for this page can be found <a href="https://github.com/sbt/website/tree/master/src/paradox/faq.md">here</a>.
+</div>
+
+</div>
+<div class="large-3 show-for-large column" data-sticky-container>
+<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
+<div class="page-nav">
+<div class="nav-title">On this page:</div>
+<div class="nav-toc">
+<ul>
+  <li><a href="faq.html#frequently-asked-questions" class="header">Frequently Asked Questions</a>
+  <ul>
+    <li><a href="faq.html#project-information" class="header">Project Information</a></li>
+    <li><a href="faq.html#usage" class="header">Usage</a></li>
+    <li><a href="faq.html#build-definitions" class="header">Build definitions</a></li>
+    <li><a href="faq.html#extending-sbt" class="header">Extending sbt</a></li>
+    <li><a href="faq.html#errors" class="header">Errors</a></li>
+    <li><a href="faq.html#dependency-management" class="header">Dependency Management</a></li>
+    <li><a href="faq.html#miscellaneous" class="header">Miscellaneous</a></li>
+  </ul></li>
+</ul>
+</div>
+</div>
+</nav>
+</div>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<footer class="site-footer">
+
+<section class="site-footer-nav">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 medium-4 large-3 text-center column">
+<div class="nav-links">
+<ul>
+<!-- <li><a href="https://www.example.com/products/">Products</a> -->
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="site-footer-base">
+<div class="expanded row">
+<div class="small-12 large-offset-2 large-10 column">
+<div class="row site-footer-content">
+
+<div class="small-12 text-center large-9 column">
+
+<!--
+<div class="copyright">
+<span class="text">&copy; 2017</span>
+<a href="https://www.example.com" class="logo">logo</a>
+</div>
+-->
+</div>
+
+</div>
+</div>
+</div>
+</section>
+</footer>
+
+</div>
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="lib/foundation/dist/foundation.min.js"></script>
+<script type="text/javascript">jQuery(document).foundation();</script>
+<script type="text/javascript" src="js/magellan.js"></script>
+
+<style type="text/css">@import "lib/prettify/prettify.css";</style>
+<script type="text/javascript" src="lib/prettify/prettify.js"></script>
+<script type="text/javascript" src="lib/prettify/lang-scala.js"></script>
+<script type="text/javascript">jQuery(function(){window.prettyPrint && prettyPrint()});</script>
+
+</html>
