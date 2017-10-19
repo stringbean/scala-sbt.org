@@ -56,4 +56,7 @@ See also the [API Documentation](../api/index.html), and the [index of names and
 
 @@@ index
 * [Getting Started](getting-started/index.md)
+* [Plugin Devleopers](plugin-developers/index.md)
+* [sbt Developers](developing-sbt/index.md)
+* [FAQ](faq.md)
 @@@

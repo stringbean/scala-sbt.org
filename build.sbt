@@ -43,6 +43,9 @@ lazy val root = (project in file("."))
     // new stuff
     siteSubdirName in Paradox := s"""$targetSbtBinaryVersion/docs""",
     paradoxProperties ++= Map(
-      "app_version" -> "1.0.2"
+      "app_version" -> "1.0.2",
+      "image.base_url" -> "/1.x/docs/files/",
+      "extref.github.base_url" -> "https://github.com/%s",
+      "extref.module.base_url" -> "https://github.com/sbt/%s"
     )
   )
